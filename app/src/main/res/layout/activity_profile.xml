@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="20dp"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="291dp"
+        android:layout_height="383dp"
+        app:srcCompat="@drawable/logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2" />
 
     <EditText
         android:id="@+id/userIDInput"
