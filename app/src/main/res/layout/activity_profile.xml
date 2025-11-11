@@ -31,8 +31,36 @@
     <Button
         android:id="@+id/signInButton"
         android:text="Sign In"
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#000000"
+        android:textColor="@android:color/white"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:layout_gravity="center" />
+
+
+    <Button
+        android:id="@+id/signUpButton"
+        android:text="Sign Up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#000000"
+        android:textColor="@android:color/white"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="10dp"
+        android:layout_gravity="center" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="If you do not have an account, please sign up!"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+
 
 </LinearLayout>
