@@ -91,17 +91,17 @@
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="#234F2E"
+        android:clipToPadding="false"
+        android:elevation="8dp"
         android:paddingTop="6dp"
         android:paddingBottom="16dp"
-        android:elevation="8dp"
-        android:clipToPadding="false"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"
+        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent"
+        app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="26dp"
         app:itemIconTint="@color/bottom_nav_item_tint"
         app:itemTextColor="@color/bottom_nav_item_tint"
-        app:itemHorizontalTranslationEnabled="false"
-        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent" />
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>
 
 
