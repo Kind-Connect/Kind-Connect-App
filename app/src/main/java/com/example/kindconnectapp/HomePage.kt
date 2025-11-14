@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomePage : AppCompatActivity() {
@@ -13,8 +16,11 @@ class HomePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // top bar
+        // --- Views ---
         val toolbar = findViewById<Toolbar>(R.id.topToolbar)
+        val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+
+        // --- Toolbar setup ---
         setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size)
         toolbar.setNavigationOnClickListener {
@@ -22,14 +28,19 @@ class HomePage : AppCompatActivity() {
         }
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.action_search -> { Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show(); true }
-                R.id.action_profile -> { startActivity(Intent(this, ProfileActivity::class.java)); true }
+                R.id.action_search -> {
+                    Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.action_profile -> {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
 
-        // bottom nav → route to pages in the same order as Figma
-        val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        // --- Bottom nav routing ---
         bottom.selectedItemId = R.id.nav_home
         bottom.setOnItemSelectedListener { it ->
             when (it.itemId) {
@@ -40,8 +51,19 @@ class HomePage : AppCompatActivity() {
                 else -> false
             }
         }
+
+        // --- Apply system insets (status/gesture) safely ---
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
+            val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = v.paddingTop + sys.top)
+            insets
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(bottom) { v, insets ->
+            val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = v.paddingBottom + sys.bottom)
+            insets
+        }
     }
 }
-
 
 
