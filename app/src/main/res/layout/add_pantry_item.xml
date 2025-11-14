@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginBottom="8dp"
+        android:text="Add Pantry Item"
+        android:textSize="20sp" />
+    <TextView
+        android:text="Enter item details:"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_height="46dp"/>
+
+    <EditText
+        android:id="@+id/editName"
+        android:hint="Item Name"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:hint="Description"
+        android:inputType="text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+    <EditText
+        android:id="@+id/editQuantity"
+        android:hint="Quantity"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+
+    <EditText
+        android:id="@+id/editExpirationDate"
+        android:hint="Expiration Date (e.g. 2025-12-01)"
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+</LinearLayout>
