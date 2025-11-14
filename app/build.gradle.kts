@@ -41,6 +41,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+    implementation("com.mapbox.maps:android-ndk27:11.16.2")//mapbox latest version
+        // if your app does not require 16 KB page size support, the default dependency without -ndk27 can be used
+        // implementation("com.mapbox.maps:android:11.16.2")
+
     implementation(libs.androidx.constraintlayout)
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.google.code.gson:gson:2.10.1")
