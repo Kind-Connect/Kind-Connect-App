@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation("com.mapbox.maps:android-ndk27:11.16.2")
+    //implementation("com.mapbox.maps:android:11.16.2")
 
     implementation(libs.androidx.constraintlayout)
 
