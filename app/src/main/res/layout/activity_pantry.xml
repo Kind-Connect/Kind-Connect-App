@@ -1,42 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
 
-    <View
+    <!-- Top Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topToolbar"
         android:layout_width="match_parent"
-        android:layout_height="49dp" />
+        android:layout_height="80dp"
+        android:paddingTop="16dp"
+        android:background="#234F2E"
+        app:title="Pantry"
+        app:titleTextColor="@android:color/white"
+        app:titleMarginStart="24dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pantry Page"
-        android:textSize="22sp"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/goPantryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primaryGreen"
-        android:text="Go to My Pantry" />
-
-    <Button
-        android:id="@+id/goRgButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/primaryGreen"
-        android:text="Go to Recipe Generator" />
-
-    <FrameLayout
-        android:id="@+id/pantryFragmentContainer"
+    <!-- Scroll Content -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="20dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Page Title -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Pantry"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:paddingBottom="20dp" />
+
+            <!-- Buttons -->
+            <Button
+                android:id="@+id/goPantryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#234F2E"
+                android:textColor="@android:color/white"
+                android:text="Go to My Pantry"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="12dp" />
+
+            <Button
+                android:id="@+id/goRgButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#234F2E"
+                android:textColor="@android:color/white"
+                android:text="Go to Recipe Generator"
+                android:paddingVertical="12dp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Fragment Container -->
+            <FrameLayout
+                android:id="@+id/pantryFragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="#234F2E"
+        android:elevation="8dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent"
+        app:itemHorizontalTranslationEnabled="false"
+        app:itemIconSize="26dp"
+        app:itemIconTint="@color/bottom_nav_item_tint"
+        app:itemTextColor="@color/bottom_nav_item_tint"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>
