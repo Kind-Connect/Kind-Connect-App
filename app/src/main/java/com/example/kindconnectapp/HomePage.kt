@@ -16,31 +16,11 @@ class HomePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // --- Views ---
-        val toolbar = findViewById<Toolbar>(R.id.topToolbar)
+        
         val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
 
-        // --- Toolbar setup ---
-        setSupportActionBar(toolbar)
-        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size)
-        toolbar.setNavigationOnClickListener {
-            Toast.makeText(this, "Menu clicked", Toast.LENGTH_SHORT).show()
-        }
-        toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_search -> {
-                    Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.action_profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    true
-                }
-                else -> false
-            }
-        }
 
-        // --- Bottom nav routing ---
+
         bottom.selectedItemId = R.id.nav_home
         bottom.setOnItemSelectedListener { it ->
             when (it.itemId) {
@@ -52,12 +32,6 @@ class HomePage : AppCompatActivity() {
             }
         }
 
-        // --- Apply system insets (status/gesture) safely ---
-        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
-            val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(top = v.paddingTop + sys.top)
-            insets
-        }
         ViewCompat.setOnApplyWindowInsetsListener(bottom) { v, insets ->
             val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.updatePadding(bottom = v.paddingBottom + sys.bottom)

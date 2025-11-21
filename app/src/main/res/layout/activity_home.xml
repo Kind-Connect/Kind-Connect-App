@@ -7,19 +7,19 @@
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
-    <!-- Taller Top Toolbar (clears camera cutout) -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topToolbar"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:paddingTop="16dp"
         android:background="#234F2E"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
         app:title="KindConnect"
         app:titleTextColor="@android:color/white"
-        app:titleMarginStart="24dp"
-        app:menu="@menu/topbar_menu" />
+        app:titleMarginStart="24dp" />
 
-    <!-- Scrollable Content -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -131,7 +131,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation; larger & lifted so text is visible on all devices -->
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
