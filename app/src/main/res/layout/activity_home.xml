@@ -19,7 +19,6 @@
         app:titleTextColor="@android:color/white"
         app:titleMarginStart="24dp" />
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -34,7 +33,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Logo centered -->
             <ImageView
                 android:id="@+id/logoImage"
                 android:layout_width="120dp"
@@ -44,7 +42,6 @@
                 android:contentDescription="KindConnect logo"
                 app:srcCompat="@drawable/logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2" />
 
-            <!-- Friendly welcome -->
             <TextView
                 android:id="@+id/welcomeTitle"
                 android:layout_width="match_parent"
@@ -56,7 +53,15 @@
                 android:gravity="center"
                 android:paddingBottom="6dp" />
 
-            <!-- description -->
+            <TextView
+                android:id="@+id/greetingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:padding="16dp"
+                android:text="Welcome" />
+
             <TextView
                 android:id="@+id/descriptionText"
                 android:layout_width="match_parent"
@@ -68,7 +73,6 @@
                 android:gravity="center"
                 android:paddingBottom="18dp" />
 
-            <!-- FEATURES Section -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,14 +82,12 @@
                 android:textSize="18sp"
                 android:paddingBottom="10dp" />
 
-            <!-- Feature Cards -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="4dp">
 
-                <!-- Pantry -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -96,7 +98,6 @@
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
-                <!-- Map -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -107,7 +108,6 @@
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
-                <!-- Resources -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,7 +118,6 @@
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
-                <!-- Home reminder (optional) -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -130,7 +129,6 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -148,8 +146,8 @@
         app:itemTextColor="@color/bottom_nav_item_tint"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu"
-        app:itemBackground="@android:color/transparent"
-        />
+        app:itemBackground="@android:color/transparent" />
+
 </LinearLayout>
 
 
