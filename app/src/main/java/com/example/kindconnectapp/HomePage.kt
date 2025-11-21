@@ -1,7 +1,9 @@
 package com.example.kindconnectapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -16,11 +18,14 @@ class HomePage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // --- Views ---
         val toolbar = findViewById<Toolbar>(R.id.topToolbar)
         val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val greeting = findViewById<TextView>(R.id.greetingText)
 
-        // --- Toolbar setup ---
+        val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val name = prefs.getString("name", "User")
+        greeting.text = "Welcome, $name"
+
         setSupportActionBar(toolbar)
         toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size)
         toolbar.setNavigationOnClickListener {
@@ -40,11 +45,10 @@ class HomePage : AppCompatActivity() {
             }
         }
 
-        // --- Bottom nav routing ---
         bottom.selectedItemId = R.id.nav_home
         bottom.setOnItemSelectedListener { it ->
             when (it.itemId) {
-                R.id.nav_home -> true // already here
+                R.id.nav_home -> true
                 R.id.nav_pantry -> { startActivity(Intent(this, PantryActivity::class.java)); true }
                 R.id.nav_map -> { startActivity(Intent(this, MapActivity::class.java)); true }
                 R.id.nav_resources -> { startActivity(Intent(this, ResourcesActivity::class.java)); true }
@@ -52,7 +56,6 @@ class HomePage : AppCompatActivity() {
             }
         }
 
-        // --- Apply system insets (status/gesture) safely ---
         ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
             val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.updatePadding(top = v.paddingTop + sys.top)
@@ -65,5 +68,3 @@ class HomePage : AppCompatActivity() {
         }
     }
 }
-
-
