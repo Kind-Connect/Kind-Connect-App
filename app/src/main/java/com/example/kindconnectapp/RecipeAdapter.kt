@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RecipeAdapter(private val recipeList: List<Recipe>) :
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
@@ -37,10 +39,31 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
         val heartRes = if (recipe.isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
         holder.favoriteIcon.setImageResource(heartRes)
 
+        val db = FirebaseFirestore.getInstance()
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "guest"
         holder.favoriteIcon.setOnClickListener {
             recipe.isFavorite = !recipe.isFavorite
             val newIcon = if (recipe.isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
             holder.favoriteIcon.setImageResource(newIcon)
+            val favoritesRef = db.collection("users").document(userId).collection("favorites")
+
+            if (recipe.isFavorite) {
+                val recipeData = hashMapOf(
+                    "id" to recipe.id,
+                    "title" to recipe.title,
+                    "image" to recipe.image,
+                    "usedIngredientCount" to (recipe.usedIngredientCount ?: 0),
+                    "missedIngredientCount" to recipe.missedIngredientCount,
+                    "summary" to recipe.summary,
+                    "instructions" to recipe.instructions,
+                    "isFavorite" to recipe.isFavorite
+                )
+
+                favoritesRef.document(recipe.id.toString()).set(recipeData)
+            } else {
+                favoritesRef.document(recipe.id.toString()).delete()
+            }
+
         }
         holder.itemView.setOnClickListener {
              val context = holder.itemView.context

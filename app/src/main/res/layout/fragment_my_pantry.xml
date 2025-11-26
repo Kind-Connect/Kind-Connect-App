@@ -6,10 +6,18 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/outline_arrow_back_24"
+        android:contentDescription="Back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_margin="10dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="48dp" />
-
     <TextView
         android:id="@+id/pantryTitle"
         android:layout_width="wrap_content"
@@ -25,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add New Pantry Item"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="#234F2E"
         android:textColor="@android:color/white"
         android:layout_marginBottom="12dp" />
 

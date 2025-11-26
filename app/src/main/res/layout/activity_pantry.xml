@@ -64,7 +64,19 @@
                 android:paddingVertical="12dp"
                 android:layout_marginBottom="20dp" />
 
+            <!-- Cooking Doodle Illustration -->
             <!-- Fragment Container -->
+            <ImageView
+                android:id="@+id/pantryIllustration"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:contentDescription="Cooking doodle illustration"
+                android:scaleType="centerInside"
+                android:src="@drawable/cookingdoodle"
+                android:visibility="visible" />
+
             <FrameLayout
                 android:id="@+id/pantryFragmentContainer"
                 android:layout_width="match_parent"
@@ -78,7 +90,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="84dp"
         android:background="#234F2E"
         android:elevation="8dp"
         android:paddingTop="4dp"

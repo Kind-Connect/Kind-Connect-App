@@ -6,11 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Back"
+        android:src="@drawable/outline_arrow_back_24" />
     <!-- Spacer to push content down -->
     <View
         android:layout_width="match_parent"
         android:layout_height="48dp" />
-
     <TextView
         android:text="What's in Your Pantry?"
         android:textSize="18sp"
@@ -33,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find Recipes"
-        android:backgroundTint="@color/primaryGreen"
+        android:backgroundTint="#234F2E"
         android:layout_marginBottom="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView

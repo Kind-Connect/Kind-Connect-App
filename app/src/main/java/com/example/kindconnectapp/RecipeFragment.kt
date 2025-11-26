@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,9 @@ class RecipeFragment : Fragment() {
             if (ingredients.isNotBlank()) {
                 fetchRecipes(ingredients)
             }
+        }
+        view.findViewById<ImageButton>(R.id.backButton).setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 

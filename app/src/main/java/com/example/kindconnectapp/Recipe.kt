@@ -4,7 +4,7 @@ data class Recipe(
     val id: Int,
     val title: String,
     val image: String,
-    val usedIngredientCount: Int,
+    val usedIngredientCount: Int? = null,
     val missedIngredientCount: Int,
     val summary: String? = null,
     val instructions: String? = null,

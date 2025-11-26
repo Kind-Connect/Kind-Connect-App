@@ -2,6 +2,7 @@ package com.example.kindconnectapp
 
 import android.os.Bundle
 import android.text.Html
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -23,5 +24,9 @@ class RecipeDetailActivity : AppCompatActivity() {
         titleView.text = title
         instructionsView.text = Html.fromHtml(instructions ?: "No instructions available", Html.FROM_HTML_MODE_LEGACY)
         Glide.with(this).load(imageUrl).into(imageView)
+
+        findViewById<ImageButton>(R.id.backButton).setOnClickListener {
+            finish() // closes the activity and returns to previous screen
+        }
     }
 }

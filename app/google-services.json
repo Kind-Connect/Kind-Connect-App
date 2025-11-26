@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "855560174745",
+    "project_id": "kindconnect-app",
+    "storage_bucket": "kindconnect-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855560174745:android:42ac7669150deb7ce18c08",
+        "android_client_info": {
+          "package_name": "com.example.kindconnectapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqX9cJuKRPK6zI_ff63TFb-UO6u-N-xAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
