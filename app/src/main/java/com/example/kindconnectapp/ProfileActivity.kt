@@ -4,10 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.textfield.TextInputEditText
 
 class ProfileActivity : AppCompatActivity() {
 
@@ -15,80 +15,67 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        val emailInput = findViewById<EditText>(R.id.emailInput)
-        val passwordInput = findViewById<EditText>(R.id.passwordInput)
-        val signInBtn = findViewById<Button>(R.id.signInButton)
-        val registerBtn = findViewById<Button>(R.id.signUpButton)
+        val nameInput = findViewById<TextInputEditText>(R.id.nameInput)
+        val emailInput = findViewById<TextInputEditText>(R.id.emailInput)
+        val passwordInput = findViewById<TextInputEditText>(R.id.passwordInput)
+        val signInBtn = findViewById<MaterialButton>(R.id.signInButton)
+        val registerBtn = findViewById<MaterialButton>(R.id.signUpButton)
 
-        // SharedPreferences for saving login info
         val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
 
-        fun validate(): Boolean {
+        fun validateRegister(): Boolean {
+            val name = nameInput.text.toString().trim()
             val email = emailInput.text.toString().trim()
             val pass = passwordInput.text.toString().trim()
 
-            // Email must not be empty
-            if (email.isEmpty()) {
-                emailInput.error = "Email required"
+            if (name.isEmpty()) {
+                nameInput.error = "Enter name"
                 return false
             }
-
-            // Email must be valid format
-            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                emailInput.error = "Enter a valid email"
+            if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailInput.error = "Enter valid email"
                 return false
             }
-
-            // Password required
-            if (pass.isEmpty()) {
-                passwordInput.error = "Password required"
+            if (pass.isEmpty() || pass.length !in 8..12) {
+                passwordInput.error = "8–12 character password"
                 return false
             }
-
-            // Password must be 8–12 characters
-            if (pass.length < 8 || pass.length > 12) {
-                passwordInput.error = "Password must be 8–12 characters"
-                return false
-            }
-
             return true
         }
 
-        // REGISTER
         registerBtn.setOnClickListener {
-            if (!validate()) return@setOnClickListener
+            if (!validateRegister()) return@setOnClickListener
 
+            val name = nameInput.text.toString().trim()
             val email = emailInput.text.toString().trim()
             val pass = passwordInput.text.toString().trim()
 
-            // Save email/password locally
             prefs.edit()
+                .putString("name", name)
                 .putString("email", email)
                 .putString("password", pass)
                 .apply()
-
-            Toast.makeText(this, "Account created!", Toast.LENGTH_SHORT).show()
 
             startActivity(Intent(this, HomePage::class.java))
             finish()
         }
 
-        // SIGN IN
         signInBtn.setOnClickListener {
-            if (!validate()) return@setOnClickListener
-
             val email = emailInput.text.toString().trim()
             val pass = passwordInput.text.toString().trim()
+            val typedName = nameInput.text.toString().trim()
 
             val savedEmail = prefs.getString("email", null)
             val savedPass = prefs.getString("password", null)
 
             if (email == savedEmail && pass == savedPass) {
-                Toast.makeText(this, "Signed in!", Toast.LENGTH_SHORT).show()
+                if (typedName.isNotEmpty()) {
+                    prefs.edit().putString("name", typedName).apply()
+                }
                 startActivity(Intent(this, HomePage::class.java))
                 finish()
             } else {
-                Toast.makeText(this, "Incorrect email or password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Incorrect login", Toast.LENGTH_SHORT).show()
             }
         }
     }
