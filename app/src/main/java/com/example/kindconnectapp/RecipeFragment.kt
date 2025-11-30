@@ -1,5 +1,6 @@
 package com.example.kindconnectapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -52,7 +53,15 @@ class RecipeFragment : Fragment() {
                 fetchRecipes(ingredients)
             }
         }
-        view.findViewById<ImageButton>(R.id.backButton).setOnClickListener {
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)
+
+        // Set a back arrow icon
+        toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24)
+
+        // Make the arrow white
+        toolbar.navigationIcon?.setTint(Color.WHITE)
+        // Back behavior
+        toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }

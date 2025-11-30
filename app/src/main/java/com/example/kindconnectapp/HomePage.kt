@@ -66,10 +66,7 @@ class HomePage : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_favorites -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.pantryFragmentContainer, FavoriteRecipesFragment())
-                        .addToBackStack(null)
-                        .commit()
+                    startActivity(Intent(this, FavoriteRecipesActivity::class.java))
                     drawerLayout.closeDrawers()
                     true
                 }

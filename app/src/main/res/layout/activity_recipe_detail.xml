@@ -2,21 +2,24 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!-- Top Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingTop="16dp"
+            android:background="#234F2E"
+            app:title="Recipe Generator"
+            app:titleTextColor="@android:color/white"
+            app:titleMarginStart="24dp" />
 
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/outline_arrow_back_24"
-            android:contentDescription="@string/back"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:layout_margin="4dp" />
         <ImageView
             android:id="@+id/recipeImage"
             android:layout_width="match_parent"

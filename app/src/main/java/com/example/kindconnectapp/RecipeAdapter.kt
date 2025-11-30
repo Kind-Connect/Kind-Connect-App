@@ -1,6 +1,8 @@
 package com.example.kindconnectapp
 
+import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +10,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RecipeAdapter(private val recipeList: List<Recipe>) :
@@ -39,13 +40,20 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
         val heartRes = if (recipe.isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
         holder.favoriteIcon.setImageResource(heartRes)
 
-        val db = FirebaseFirestore.getInstance()
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: "guest"
         holder.favoriteIcon.setOnClickListener {
+            val prefs = holder.itemView.context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+            val name = prefs.getString("name", "User") ?: "User"
+
+            val db = FirebaseFirestore.getInstance()
+            val favoritesRef = db.collection("users").document(name).collection("favorites")
+            // ✅ Add this log
+            Log.d("RecipeAdapter", "Saving favorite for user=$name, recipeId=${recipe.id}")
+
             recipe.isFavorite = !recipe.isFavorite
-            val newIcon = if (recipe.isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
+            val newIcon = if (recipe.isFavorite) R.drawable.baseline_favorite_24
+            else R.drawable.baseline_favorite_border_24
             holder.favoriteIcon.setImageResource(newIcon)
-            val favoritesRef = db.collection("users").document(userId).collection("favorites")
+
 
             if (recipe.isFavorite) {
                 val recipeData = hashMapOf(
@@ -58,12 +66,10 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
                     "instructions" to recipe.instructions,
                     "isFavorite" to recipe.isFavorite
                 )
-
                 favoritesRef.document(recipe.id.toString()).set(recipeData)
             } else {
                 favoritesRef.document(recipe.id.toString()).delete()
             }
-
         }
         holder.itemView.setOnClickListener {
              val context = holder.itemView.context

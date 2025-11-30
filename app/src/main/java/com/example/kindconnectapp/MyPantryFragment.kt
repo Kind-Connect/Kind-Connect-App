@@ -1,6 +1,7 @@
 package com.example.kindconnectapp
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +41,16 @@ class MyPantryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Back button logic
-        view.findViewById<ImageButton>(R.id.backButton).setOnClickListener {
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)
+
+        // Set a back arrow icon
+        toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24)
+
+        // Make the arrow white
+        toolbar.navigationIcon?.setTint(Color.WHITE)
+
+        // Back behavior
+        toolbar.setNavigationOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 

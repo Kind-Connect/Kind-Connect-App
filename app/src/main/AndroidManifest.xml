@@ -22,6 +22,8 @@
         <activity android:name=".MyPantryActivity" />
         <activity android:name=".RecipeGeneratorActivity" />
         <activity android:name=".RecipeDetailActivity" />
+        <activity android:name=".FavoriteRecipesActivity" />
+
 
         <activity
             android:name=".MainActivity"

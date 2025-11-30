@@ -1,33 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Top Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingTop="16dp"
+        android:background="#234F2E"
+        app:title="My Pantry Items"
+        app:titleTextColor="@android:color/white"
+        app:titleMarginStart="24dp" />
 
-    <ImageButton
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/outline_arrow_back_24"
-        android:contentDescription="Back"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_margin="10dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="48dp" />
-    <TextView
-        android:id="@+id/pantryTitle"
-        android:layout_width="wrap_content"
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="12dp"-->
+<!--        android:background="#D5D1D1"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:text="🍽️ Keep track of the items in your pantry!"-->
+<!--        android:textColor="#333333"-->
+<!--        android:textSize="16sp" />-->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="MyPantry"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="8dp" />
+        android:layout_margin="16dp"
+        app:cardElevation="4dp"
+        app:cardCornerRadius="12dp">
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/outline_info_24"/>
+
+            <TextView
+                android:layout_marginStart="8dp"
+                android:text="Keep track of the items in your pantry!"
+                android:textColor="#333"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#234F2E"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"/>
     <Button
         android:id="@+id/addItemButton"
         android:layout_width="match_parent"
@@ -35,7 +72,21 @@
         android:text="Add New Pantry Item"
         android:backgroundTint="#234F2E"
         android:textColor="@android:color/white"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="12dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Pantry Items"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="#234F2E"/>
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/pantryRecyclerView"

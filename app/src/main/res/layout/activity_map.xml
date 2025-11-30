@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapActivity">
-
+    <!-- Top Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/topToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:paddingTop="16dp"
+        android:background="#234F2E"
+        app:title="Map"
+        app:titleTextColor="@android:color/white"
+        app:titleMarginStart="24dp"
+        tools:ignore="MissingConstraints" />
     <!-- Mapbox MapView -->
 
     <com.mapbox.maps.MapView
