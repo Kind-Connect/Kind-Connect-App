@@ -18,6 +18,9 @@
         app:titleTextColor="@android:color/white"
         app:titleMarginStart="24dp" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
     <!-- Scroll Content -->
     <ScrollView
         android:layout_width="match_parent"
@@ -27,21 +30,44 @@
         android:paddingEnd="20dp"
         android:paddingTop="20dp">
 
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="6dp"
+            app:cardUseCompatPadding="true">
+
+
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="48dp" />
+
             <!-- Page Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Pantry"
+                android:text="My Pantry🥫"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:paddingBottom="20dp" />
+            <!-- Pantry Description -->
+            <TextView
+                android:id="@+id/pantryDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your pantry hub — track items and find recipe ideas."
+                android:textSize="14sp"
+                android:textColor="#A2A0A0"
+                android:layout_marginBottom="12dp"/>
 
             <!-- Buttons -->
             <Button
@@ -50,18 +76,18 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="#234F2E"
                 android:textColor="@android:color/white"
-                android:text="Go to My Pantry"
-                android:paddingVertical="12dp"
+                android:text="Go to My Pantry Items"
+                android:paddingVertical="18dp"
                 android:layout_marginBottom="12dp" />
 
             <Button
                 android:id="@+id/goRgButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#234F2E"
+                android:backgroundTint="#4CAF50"
                 android:textColor="@android:color/white"
                 android:text="Go to Recipe Generator"
-                android:paddingVertical="12dp"
+                android:paddingVertical="18dp"
                 android:layout_marginBottom="20dp" />
 
             <!-- Fragment Container -->
@@ -72,13 +98,14 @@
                 android:paddingTop="10dp" />
 
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
     </ScrollView>
 
     <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="84dp"
         android:background="#234F2E"
         android:elevation="8dp"
         android:paddingTop="4dp"

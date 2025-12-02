@@ -4,4 +4,8 @@
     <string name="favorite_icon">Favorite icon</string>
     <string name="recipe_title">Recipe Title</string>
     <string name="instructions_will_appear_here">Instructions will appear here...</string>
+    <string name="back">Back</string>
+    <string name="no_favorites_yet">No favorites yet!</string>
+    <string name="navigation_drawer_open">openDrawer</string>
+    <string name="navigation_drawer_close">close</string>
 </resources>

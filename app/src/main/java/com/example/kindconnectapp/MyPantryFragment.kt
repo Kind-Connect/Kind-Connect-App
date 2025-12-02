@@ -1,12 +1,14 @@
 package com.example.kindconnectapp
 
 import android.app.AlertDialog
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,6 +37,23 @@ class MyPantryFragment : Fragment() {
         }
 
         return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)
+
+        // Set a back arrow icon
+        toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24)
+
+        // Make the arrow white
+        toolbar.navigationIcon?.setTint(Color.WHITE)
+
+        // Back behavior
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
+
     }
 
     private fun showAddItemDialog() {

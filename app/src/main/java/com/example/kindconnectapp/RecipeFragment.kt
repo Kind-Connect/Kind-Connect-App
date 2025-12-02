@@ -1,5 +1,6 @@
 package com.example.kindconnectapp
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +52,17 @@ class RecipeFragment : Fragment() {
             if (ingredients.isNotBlank()) {
                 fetchRecipes(ingredients)
             }
+        }
+        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)
+
+        // Set a back arrow icon
+        toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24)
+
+        // Make the arrow white
+        toolbar.navigationIcon?.setTint(Color.WHITE)
+        // Back behavior
+        toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
