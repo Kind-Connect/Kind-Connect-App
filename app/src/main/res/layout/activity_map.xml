@@ -28,6 +28,12 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <!-- Custom Bottom Navigation Bar -->
+        <androidx.compose.ui.platform.ComposeView
+            android:id="@+id/searchCompose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            tools:ignore="MissingConstraints" />
     </com.mapbox.maps.MapView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
