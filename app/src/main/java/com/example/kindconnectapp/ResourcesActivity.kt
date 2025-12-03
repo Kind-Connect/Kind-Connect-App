@@ -1,6 +1,7 @@
 package com.example.kindconnectapp
 
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,6 @@ class ResourcesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resources)
 
-        // --- Bottom Navigation Setup ---
         val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottom.selectedItemId = R.id.nav_resources
 
@@ -39,63 +39,40 @@ class ResourcesActivity : AppCompatActivity() {
             }
         }
 
-        // --- RecyclerView Setup ---
         val recyclerView = findViewById<RecyclerView>(R.id.resourcesRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val resourceList = listOf(
-            Resource(
-                name = "Petersburg Mental Health Support Center",
-                description = "Provides crisis services, evaluations, and outpatient counseling.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Petersburg Community Shelter",
-                description = "Emergency shelter offering temporary housing and support services.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Hope Behavioral Wellness Clinic",
-                description = "Therapy, substance abuse programs, and long-term treatment plans.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "River City Youth Support Center",
-                description = "Youth counseling, after-school mentoring, and crisis intervention.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Tri-Cities Women’s Resource Hub",
-                description = "Shelter assistance, advocacy services, and housing resources for women.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Better Pathways Addiction Recovery",
-                description = "Offers outpatient and group substance abuse treatment programs.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Southside Family Health Services",
-                description = "Family mental health services, behavioral therapy, and medical support.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Petersburg Crisis Support Hotline Center",
-                description = "24/7 crisis intervention and referral services for individuals in need.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Community Outreach Recovery Program",
-                description = "Free counseling services, community outreach, and wellness education.",
-                imageUrl = "https://via.placeholder.com/150"
-            ),
-            Resource(
-                name = "Healing Heart Support Foundation",
-                description = "Support groups, guided therapy, and grief counseling resources.",
-                imageUrl = "https://via.placeholder.com/150"
-            )
+            Resource("Petersburg Mental Health Support Center", "Provides crisis services, evaluations, and outpatient counseling.", ""),
+            Resource("Hope Behavioral Wellness Clinic", "Therapy, substance abuse programs, and long-term treatment plans.", ""),
+            Resource("Southside Family Health Services", "Family mental health services, behavioral therapy, and medical support.", ""),
+            Resource("Better Pathways Addiction Recovery", "Offers outpatient and group substance abuse treatment programs.", ""),
+            Resource("Petersburg Behavioral Treatment Center", "Intensive therapy, evaluations, and inpatient care.", ""),
+            Resource("Northside Psychological Services", "Specialized treatment for anxiety, depression, trauma, and family counseling.", ""),
+            Resource("Central Virginia Behavioral Care Center", "Outpatient therapy, psychiatric evaluations, and community wellness programs.", ""),
+            Resource("Elm Street Mental Wellness Institute", "Counseling, medication management, and emotional support services.", ""),
+            Resource("Neighborhood Mental Health & Recovery Center", "Crisis stabilization, recovery support, and long-term therapy.", ""),
+            Resource("Healing Heart Support Foundation", "Support groups, guided therapy, and grief counseling resources.", ""),
+            Resource("Petersburg Community Shelter", "Emergency shelter offering temporary housing and support services.", ""),
+            Resource("Tri-Cities Women’s Resource Hub", "Shelter assistance, advocacy services, and housing resources for women.", ""),
+            Resource("Southside Emergency Homeless Shelter", "Overnight housing, meals, and crisis support.", ""),
+            Resource("Tri-Cities Family Crisis Shelter", "Domestic support, temporary housing, and safety resources.", ""),
+            Resource("River City Youth Support Center", "Youth counseling, after-school mentoring, and crisis intervention.", ""),
+            Resource("Community Outreach Recovery Program", "Free counseling services, community outreach, and wellness education.", ""),
+            Resource("Petersburg Crisis Support Hotline Center", "24/7 crisis intervention and referral services.", ""),
+            Resource("Pathways Addiction and Recovery Home", "Long-term recovery housing, therapy, and community programs.", "")
         )
 
-        recyclerView.adapter = ResourceAdapter(this, resourceList)
+        val adapter = ResourceAdapter(this, resourceList)
+        recyclerView.adapter = adapter
+
+        val searchBar = findViewById<SearchView>(R.id.searchBar)
+        searchBar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean { return false }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filterList(newText ?: "")
+                return true
+            }
+        })
     }
 }

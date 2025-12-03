@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ResourceAdapter(
     private val context: Context,
-    private val resources: List<Resource>
+    resources: List<Resource>
 ) : RecyclerView.Adapter<ResourceAdapter.ViewHolder>() {
+
+    private var displayList: MutableList<Resource> = resources.toMutableList()
+    private val fullList: MutableList<Resource> = ArrayList(resources)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.resourceImage)
@@ -26,14 +29,26 @@ class ResourceAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val resource = resources[position]
-
+        val resource = displayList[position]
         holder.name.text = resource.name
         holder.description.text = resource.description
-
-        // Just show a static drawable for now
-        holder.image.setImageResource(R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2)
+        holder.image.setImageResource(
+            R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2
+        )
     }
 
-    override fun getItemCount(): Int = resources.size
+    override fun getItemCount(): Int = displayList.size
+
+    fun filterList(query: String) {
+        val lower = query.lowercase()
+        displayList = if (lower.isEmpty()) {
+            fullList.toMutableList()
+        } else {
+            fullList.filter { resource ->
+                resource.name.lowercase().contains(lower) ||
+                        resource.description.lowercase().contains(lower)
+            }.toMutableList()
+        }
+        notifyDataSetChanged()
+    }
 }

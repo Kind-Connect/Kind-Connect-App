@@ -8,7 +8,6 @@
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
 
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topToolbar"
         android:layout_width="match_parent"
@@ -19,7 +18,6 @@
         app:titleTextColor="@android:color/white"
         app:titleMarginStart="24dp" />
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -29,7 +27,13 @@
         android:paddingEnd="20dp"
         android:paddingTop="20dp">
 
-        <!-- Section Title -->
+        <SearchView
+            android:id="@+id/searchBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search resources (shelter, mental health)"
+            android:layout_marginBottom="16dp" />
+
         <TextView
             android:id="@+id/resourcesTitle"
             android:layout_width="match_parent"
@@ -40,7 +44,6 @@
             android:textStyle="bold"
             android:paddingBottom="10dp" />
 
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resourcesRecyclerView"
             android:layout_width="match_parent"
@@ -49,7 +52,6 @@
             android:paddingBottom="10dp" />
 
     </LinearLayout>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
