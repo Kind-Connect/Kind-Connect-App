@@ -3,10 +3,11 @@ package com.example.kindconnectapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class PantryAdapter(private val items: List<PantryItem>) :
+class PantryAdapter(private val items: MutableList<PantryItem>,private val onRemoveClick: (PantryItem) -> Unit) :
     RecyclerView.Adapter<PantryAdapter.PantryViewHolder>() {
 
     class PantryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -14,6 +15,7 @@ class PantryAdapter(private val items: List<PantryItem>) :
         val desc: TextView = itemView.findViewById(R.id.itemDescription)
         val quantity: TextView = itemView.findViewById(R.id.itemQuantity)
         val expiration: TextView = itemView.findViewById(R.id.itemExpiration)
+        val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PantryViewHolder {
@@ -28,7 +30,11 @@ class PantryAdapter(private val items: List<PantryItem>) :
         holder.desc.text = item.description
         holder.quantity.text = "Qty: ${item.quantity}"
         holder.expiration.text = "Expires: ${item.expirationDate}"
-    }
 
+        // Set click listener for the Remove button
+        holder.btnRemove.setOnClickListener {
+            onRemoveClick(item)   // delegate to fragment
+        }
+    }
     override fun getItemCount(): Int = items.size
 }

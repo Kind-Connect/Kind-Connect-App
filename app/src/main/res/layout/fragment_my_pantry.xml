@@ -20,15 +20,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="48dp" />
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:padding="12dp"-->
-<!--        android:background="#D5D1D1"-->
-<!--        android:layout_marginBottom="8dp"-->
-<!--        android:text="🍽️ Keep track of the items in your pantry!"-->
-<!--        android:textColor="#333333"-->
-<!--        android:textSize="16sp" />-->
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
