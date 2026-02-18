@@ -20,8 +20,7 @@ class ResourceAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(context)
-            .inflate(R.layout.item_resource, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_resource, parent, false)
         return ViewHolder(view)
     }
 
@@ -31,9 +30,10 @@ class ResourceAdapter(
         holder.name.text = resource.name
         holder.description.text = resource.description
 
-        // Just show a static drawable for now
-        holder.image.setImageResource(R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2)
+        holder.image.setImageResource(
+            R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2
+        )
     }
 
-    override fun getItemCount(): Int = resources.size
+    override fun getItemCount() = resources.size
 }

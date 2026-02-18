@@ -29,7 +29,7 @@ class HomePage : AppCompatActivity() {
 
         val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val name = prefs.getString("name", "User")
-        greeting.text = "Welcome, $name"
+        greeting.text = "$name"
 
         // Set toolbar behaviors
         setSupportActionBar(toolbar)

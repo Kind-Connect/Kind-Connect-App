@@ -13,21 +13,16 @@ import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
 class MapActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
-    // You can also declare a variable for the bottom navigation view
     private lateinit var bottomNavigationView: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // --- THIS IS THE KEY CHANGE ---
-        // Set the content view to your XML layout file instead of just the MapView
         setContentView(R.layout.activity_map)
 
-        // Now, find the views by their IDs defined in the XML file
         mapView = findViewById(R.id.mapView)
         bottomNavigationView = findViewById(R.id.bottomNavigation)
 
-        // Initialize the map (this code can stay)
         mapView.mapboxMap.setCamera(
             CameraOptions.Builder()
                 .center(Point.fromLngLat(-98.0, 39.5))
@@ -38,9 +33,8 @@ class MapActivity : AppCompatActivity() {
         )
 
         val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
-        bottom.selectedItemId = R.id.nav_map  // highlight Pantry tab
+        bottom.selectedItemId = R.id.nav_map
 
-        // Optional: Set up a listener for your navigation bar
         bottom.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -52,7 +46,7 @@ class MapActivity : AppCompatActivity() {
                     startActivity(Intent(this, PantryActivity::class.java))
                     overridePendingTransition(0, 0)
                     true
-                }  // already here
+                }
                 R.id.nav_map -> true
                 R.id.nav_resources -> {
                     startActivity(Intent(this, ResourcesActivity::class.java))

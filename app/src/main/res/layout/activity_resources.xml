@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:fitsSystemWindows="true">
-
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/topToolbar"
@@ -19,51 +17,80 @@
         app:titleTextColor="@android:color/white"
         app:titleMarginStart="24dp" />
 
-
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="8dp">
+
+        <TextView
+            android:id="@+id/resourcesHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mental Health And Shelter Resources"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#111111"
+            android:layout_marginBottom="6dp" />
+
+        <TextView
+            android:id="@+id/resourcesSubheader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View nearby food banks, shelters, and mental health clinics. Use filters to narrow by type and distance from you."
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="12dp" />
+
+        <LinearLayout
+            android:id="@+id/filterRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Spinner
+                android:id="@+id/typeFilterSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp" />
+
+            <View
+                android:layout_width="12dp"
+                android:layout_height="0dp" />
+
+            <Spinner
+                android:id="@+id/radiusFilterSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/resourcesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingTop="20dp">
-
-        <!-- Section Title -->
-        <TextView
-            android:id="@+id/resourcesTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mental Health And Shelter Resources"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:paddingBottom="10dp" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/resourcesRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:paddingBottom="10dp" />
-
-    </LinearLayout>
-
+        android:clipToPadding="false" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="84dp"
         android:background="#234F2E"
-        android:elevation="8dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="8dp"
-        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent"
         app:itemHorizontalTranslationEnabled="false"
         app:itemIconSize="26dp"
         app:itemIconTint="@color/bottom_nav_item_tint"
         app:itemTextColor="@color/bottom_nav_item_tint"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
+
 </LinearLayout>
