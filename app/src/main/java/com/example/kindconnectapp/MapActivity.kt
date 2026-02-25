@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.Lifecycle
-import com.example.androidlocationsearch.SearchScreen
+//import com.example.androidlocationsearch.SearchScreen
 import com.mapbox.search.autocomplete.PlaceAutocomplete
 import com.mapbox.common.MapboxOptions
 import kotlinx.coroutines.launch
@@ -63,11 +63,11 @@ class MapActivity : ComponentActivity() {
         composeView.setContent {
             val selectedResult = remember { mutableStateOf<SearchResult?>(null) }
             Box {
-                SearchScreen(
-                    modifier = Modifier
-                        .zIndex(1f)
-                        .align(Alignment.TopCenter)
-                )
+//                SearchScreen(
+//                    modifier = Modifier
+//                        .zIndex(1f)
+//                        .align(Alignment.TopCenter)
+//                )
             }
         }
 

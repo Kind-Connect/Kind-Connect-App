@@ -1,6 +1,7 @@
 package com.example.kindconnectapp
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.Calendar
 
 class MyPantryFragment : Fragment() {
     private val db = FirebaseFirestore.getInstance()   // Firestore reference
@@ -67,6 +69,25 @@ class MyPantryFragment : Fragment() {
         val descInput = dialogView.findViewById<EditText>(R.id.editDescription)
         val quantityInput = dialogView.findViewById<EditText>(R.id.editQuantity)
         val dateInput = dialogView.findViewById<EditText>(R.id.editExpirationDate)
+
+        dateInput.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePicker = DatePickerDialog(
+                requireContext(),
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val formatted = "${selectedMonth + 1}/$selectedDay/$selectedYear"
+                    dateInput.setText(formatted)
+                },
+                year, month, day
+            )
+
+            datePicker.datePicker.minDate = System.currentTimeMillis()
+            datePicker.show()
+        }
 
         AlertDialog.Builder(requireContext())
             .setTitle("Add Pantry Item")
