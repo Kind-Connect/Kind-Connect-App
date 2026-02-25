@@ -24,16 +24,12 @@ class PantryActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_pantry -> true  // already here
-                R.id.nav_map -> {
-                    startActivity(Intent(this, MapActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    true
-                }
                 R.id.nav_resources -> {
                     startActivity(Intent(this, ResourcesActivity::class.java))
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }
