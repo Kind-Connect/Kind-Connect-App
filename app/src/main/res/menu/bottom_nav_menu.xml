@@ -12,14 +12,14 @@
         android:title="Pantry" />
 
     <item
-        android:id="@+id/nav_map"
-        android:icon="@drawable/map"
-        android:title="Map" />
-
-    <item
         android:id="@+id/nav_resources"
         android:icon="@drawable/resources"
         android:title="Resources" />
+
+    <item
+        android:id="@+id/nav_map"
+        android:icon="@drawable/outline_profile_person_24"
+        android:title="Profile" />
 
 </menu>
 
