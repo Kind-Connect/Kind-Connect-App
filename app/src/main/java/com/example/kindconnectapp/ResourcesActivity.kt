@@ -29,11 +29,6 @@ class ResourcesActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
-                R.id.nav_map -> {
-                    startActivity(Intent(this, MapActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    true
-                }
                 R.id.nav_resources -> true
                 else -> false
             }
