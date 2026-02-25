@@ -77,6 +77,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation(libs.firebase.firestore)
     implementation("com.google.firebase:firebase-auth:22.1.1")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")

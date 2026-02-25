@@ -3,6 +3,7 @@ package com.example.kindconnectapp
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 import java.util.Calendar
 
 class MyPantryFragment : Fragment() {
@@ -23,6 +29,38 @@ class MyPantryFragment : Fragment() {
     private lateinit var pantryAdapter: PantryAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var addItemButton: Button
+
+    private var selectedImageUri: Uri? = null
+
+    private val pickImage = registerForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        if (uri != null) {
+            selectedImageUri = uri
+            tempImageView?.setImageURI(uri)
+        }
+    }
+
+    private val takePhoto = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { success ->
+        if (success) {
+            selectedImageUri?.let { uri ->
+                tempImageView?.setImageURI(uri)
+            }
+        }
+    }
+
+    // Temporary reference to the dialog's ImageView
+    private var tempImageView: ImageView? = null
+    private fun createImageUri(): Uri {
+        val image = File(requireContext().filesDir, "pantry_${System.currentTimeMillis()}.jpg")
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            image
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +107,21 @@ class MyPantryFragment : Fragment() {
         val descInput = dialogView.findViewById<EditText>(R.id.editDescription)
         val quantityInput = dialogView.findViewById<EditText>(R.id.editQuantity)
         val dateInput = dialogView.findViewById<EditText>(R.id.editExpirationDate)
+        val imageView = dialogView.findViewById<ImageView>(R.id.itemImageView)
+        val uploadButton = dialogView.findViewById<Button>(R.id.uploadImageButton)
+        val takePhotoButton = dialogView.findViewById<Button>(R.id.takePhotoButton)
+
+        tempImageView = imageView
+
+        uploadButton.setOnClickListener {
+            pickImage.launch("image/*")
+        }
+
+        takePhotoButton.setOnClickListener {
+            val uri = createImageUri()
+            selectedImageUri = uri
+            takePhoto.launch(uri)
+        }
 
         dateInput.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -93,25 +146,18 @@ class MyPantryFragment : Fragment() {
             .setTitle("Add Pantry Item")
             .setView(dialogView)
             .setPositiveButton("Add") { _, _ ->
-                val itemMap = hashMapOf(
-                    "name" to nameInput.text.toString(),
-                    "description" to descInput.text.toString(),
-                    "quantity" to (quantityInput.text.toString().toIntOrNull() ?: 1),
-                    "expiration" to dateInput.text.toString()
+                uploadImageAndSaveItem(
+                    nameInput.text.toString(),
+                    descInput.text.toString(),
+                    quantityInput.text.toString().toIntOrNull() ?: 1,
+                    dateInput.text.toString()
                 )
-                db.collection("pantryItems")
-                    .add(itemMap)
-                    .addOnSuccessListener {
-                        Toast.makeText(context, "Item saved!", Toast.LENGTH_SHORT).show()
-                        loadItems()
-                    }
-                    .addOnFailureListener {
-                        Toast.makeText(context, "Error saving item", Toast.LENGTH_SHORT).show()
-                    }
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
+
+
     private fun loadItems() {
         db.collection("pantryItems")
             .get()
@@ -123,6 +169,7 @@ class MyPantryFragment : Fragment() {
                         doc.getString("description") ?: "",
                         doc.getLong("quantity")?.toInt() ?: 0,
                         doc.getString("expiration") ?: "",
+                        doc.getString("imageUrl"),
                         firestoreId = doc.id
                     )
                     pantryItems.add(item)
@@ -143,5 +190,59 @@ class MyPantryFragment : Fragment() {
                     Toast.makeText(context, "Error removing item", Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+    private fun uploadImageAndSaveItem(
+        name: String,
+        description: String,
+        quantity: Int,
+        expiration: String
+    ) {
+        val uri = selectedImageUri
+
+        // If no image selected, save without imageUrl
+        if (uri == null) {
+            saveItemToFirestore(name, description, quantity, expiration, null)
+            return
+        }
+
+        val storageRef = FirebaseStorage.getInstance().reference
+            .child("pantry_images/${System.currentTimeMillis()}.jpg")
+
+        storageRef.putFile(uri)
+            .continueWithTask { task : com.google.android.gms.tasks.Task<com.google.firebase.storage.UploadTask.TaskSnapshot> ->
+                if (!task.isSuccessful) throw task.exception ?: Exception("Error uploading image")
+                storageRef.downloadUrl
+            }
+            .addOnSuccessListener { downloadUrl: Uri ->
+                saveItemToFirestore(name, description, quantity, expiration, downloadUrl.toString())
+            }
+            .addOnFailureListener {
+                saveItemToFirestore(name, description, quantity, expiration, null)
+            }
+    }
+    private fun saveItemToFirestore(
+        name: String,
+        description: String,
+        quantity: Int,
+        expiration: String,
+        imageUrl: String?
+    ) {
+        val itemMap = hashMapOf(
+            "name" to name,
+            "description" to description,
+            "quantity" to quantity,
+            "expiration" to expiration,
+            "imageUrl" to imageUrl
+        )
+
+        db.collection("pantryItems")
+            .add(itemMap)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Item saved!", Toast.LENGTH_SHORT).show()
+                loadItems()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error saving item", Toast.LENGTH_SHORT).show()
+            }
     }
 }

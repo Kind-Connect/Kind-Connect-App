@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class PantryAdapter(private val items: MutableList<PantryItem>,private val onRemoveClick: (PantryItem) -> Unit) :
     RecyclerView.Adapter<PantryAdapter.PantryViewHolder>() {
@@ -16,6 +18,7 @@ class PantryAdapter(private val items: MutableList<PantryItem>,private val onRem
         val quantity: TextView = itemView.findViewById(R.id.itemQuantity)
         val expiration: TextView = itemView.findViewById(R.id.itemExpiration)
         val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
+        val image: ImageView = itemView.findViewById(R.id.itemImage)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PantryViewHolder {
@@ -30,6 +33,11 @@ class PantryAdapter(private val items: MutableList<PantryItem>,private val onRem
         holder.desc.text = item.description
         holder.quantity.text = "Qty: ${item.quantity}"
         holder.expiration.text = "Expires: ${item.expirationDate}"
+
+        Glide.with(holder.itemView.context)
+            .load(item.imageUrl)
+            .placeholder(R.drawable.ic_launcher_background)
+            .into(holder.image)
 
         // Set click listener for the Remove button
         holder.btnRemove.setOnClickListener {

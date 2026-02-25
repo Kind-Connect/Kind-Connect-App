@@ -5,5 +5,6 @@ data class PantryItem(
     val description: String,
     val quantity: Int,
     val expirationDate: String,
+    val imageUrl: String? = null,
     var firestoreId: String? = null
 )
