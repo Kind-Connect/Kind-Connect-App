@@ -183,7 +183,7 @@
         android:layout_height="84dp"
         android:background="#234F2E"
         app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="26dp"
+        app:itemIconSize="29dp"
         app:itemIconTint="@color/bottom_nav_item_tint"
         app:itemTextColor="@color/bottom_nav_item_tint"
         app:labelVisibilityMode="labeled"

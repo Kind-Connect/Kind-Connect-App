@@ -79,7 +79,6 @@ class HomePage : AppCompatActivity() {
             when (it.itemId) {
                 R.id.nav_home -> true
                 R.id.nav_pantry -> { startActivity(Intent(this, PantryActivity::class.java)); true }
-                R.id.nav_map -> { startActivity(Intent(this, MapActivity::class.java)); true }
                 R.id.nav_resources -> { startActivity(Intent(this, ResourcesActivity::class.java)); true }
                 else -> false
             }
