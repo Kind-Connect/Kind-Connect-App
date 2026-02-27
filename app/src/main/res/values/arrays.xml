@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="resource_type_filter">
+        <item>All types</item>
+        <item>Food banks</item>
+        <item>Shelters</item>
+        <item>Mental health</item>
+    </string-array>
+
+    <string-array name="radius_filter">
+        <item>Any distance</item>
+        <item>Within 5 miles</item>
+        <item>Within 10 miles</item>
+        <item>Within 25 miles</item>
+    </string-array>
+
+</resources>
