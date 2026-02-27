@@ -1,5 +1,5 @@
 package com.example.kindconnectapp
-
+//Comment for commit
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
