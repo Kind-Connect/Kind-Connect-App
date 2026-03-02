@@ -24,6 +24,7 @@ import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
+import kotlin.jvm.java
 
 class MapActivity : AppCompatActivity() {
 
@@ -94,7 +95,7 @@ class MapActivity : AppCompatActivity() {
             }
         }
 
-        bottomNavigationView.selectedItemId = R.id.nav_map
+        bottomNavigationView.selectedItemId = R.id.nav_resources
         bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -107,7 +108,11 @@ class MapActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
-                R.id.nav_map -> true
+                R.id.nav_profile -> {
+                    startActivity(android.content.Intent(this, ProfilePageActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
                 R.id.nav_resources -> {
                     startActivity(android.content.Intent(this, ResourcesActivity::class.java))
                     overridePendingTransition(0, 0)

@@ -15,6 +15,7 @@
 
         <activity android:name=".HomePage" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfilePageActivity" />
         <activity android:name=".PantryActivity"/>
         <activity android:name=".MapActivity"/>
         <activity android:name=".ResourcesActivity"/>
