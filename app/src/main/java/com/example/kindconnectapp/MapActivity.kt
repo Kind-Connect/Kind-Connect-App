@@ -108,11 +108,7 @@ class MapActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
-                R.id.nav_profile -> {
-                    startActivity(android.content.Intent(this, ProfilePageActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    true
-                }
+
                 R.id.nav_resources -> {
                     startActivity(android.content.Intent(this, ResourcesActivity::class.java))
                     overridePendingTransition(0, 0)

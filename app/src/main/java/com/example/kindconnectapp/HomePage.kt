@@ -1,103 +1,100 @@
 package com.example.kindconnectapp
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import org.json.JSONObject
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 class HomePage : AppCompatActivity() {
 
-    private val PREFS = "UserPrefs"
-    private val ACCOUNTS_KEY = "accounts_json"
-    private val CURRENT_KEY = "current_user_email"
-    private val IMAGE_PICK_CODE = 1001
-
-    private lateinit var profileImage: ImageView
-    private lateinit var profileName: TextView
-    private lateinit var profileSubtitle: TextView
-    private lateinit var favoriteCount: TextView
-    private lateinit var mealsMade: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile_page)
+        setContentView(R.layout.activity_home)
 
-        profileImage = findViewById(R.id.profileImage)
-        profileName = findViewById(R.id.profileName)
-        profileSubtitle = findViewById(R.id.profileSubtitle)
-        favoriteCount = findViewById(R.id.favoriteCount)
-        mealsMade = findViewById(R.id.mealsMade)
+        // TEAMMATE TOOLBAR CODE (KEEP THIS)
+        val toolbar = findViewById<Toolbar>(R.id.topToolbar)
 
-        val prefs = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-        val currentEmail = prefs.getString(CURRENT_KEY, null)
-        val raw = prefs.getString(ACCOUNTS_KEY, null)
+        val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val greeting = findViewById<TextView>(R.id.greetingText)
 
-        if (!currentEmail.isNullOrEmpty() && !raw.isNullOrEmpty()) {
-            val accounts = JSONObject(raw)
+        val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val name = prefs.getString("name", "User")
+        greeting.text = "$name"
 
-            if (accounts.has(currentEmail)) {
-                val userObj = accounts.getJSONObject(currentEmail)
-                val name = userObj.getString("name")
-                profileName.text = "Hi $name"
-                profileSubtitle.text = currentEmail
-            }
+        // Set toolbar behaviors
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size)
+        toolbar.setNavigationOnClickListener {
+            Toast.makeText(this, "Menu clicked", Toast.LENGTH_SHORT).show()
         }
+//code was giving me errors so I commented it out.
+//        toolbar.setOnMenuItemClickListener { item ->
+//            when (item.itemId) {
+//                R.id.action_search -> {
+//                    Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show()
+//                    true
+//                }
+//                R.id.action_profile -> {
+//                    startActivity(Intent(this, ProfileActivity::class.java))
+//                    true
+//                }
+//                else -> false
+//            }
+//        }
 
-        if (!currentEmail.isNullOrEmpty()) {
-            val savedImageUri =
-                prefs.getString("profile_image_uri_$currentEmail", null)
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
 
-            if (!savedImageUri.isNullOrEmpty()) {
-                profileImage.setImageURI(Uri.parse(savedImageUri))
-            }
-        }
+        val toggle = ActionBarDrawerToggle(
+            this, drawerLayout, toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
 
-        profileImage.setOnClickListener {
-            val intent = Intent(
-                Intent.ACTION_PICK,
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-            )
-            startActivityForResult(intent, IMAGE_PICK_CODE)
-        }
-    }
-
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == IMAGE_PICK_CODE &&
-            resultCode == Activity.RESULT_OK &&
-            data != null
-        ) {
-
-            val imageUri: Uri? = data.data
-
-            if (imageUri != null) {
-
-                profileImage.setImageURI(imageUri)
-
-                val prefs = getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-                val currentEmail =
-                    prefs.getString(CURRENT_KEY, null)
-
-                if (!currentEmail.isNullOrEmpty()) {
-                    prefs.edit()
-                        .putString(
-                            "profile_image_uri_$currentEmail",
-                            imageUri.toString()
-                        )
-                        .apply()
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_favorites -> {
+                    startActivity(Intent(this, FavoriteRecipesActivity::class.java))
+                    drawerLayout.closeDrawers()
+                    true
                 }
+                else -> false
             }
+        }
+
+        bottom.selectedItemId = R.id.nav_home
+        bottom.setOnItemSelectedListener { it ->
+            when (it.itemId) {
+                R.id.nav_home -> true
+                R.id.nav_pantry -> { startActivity(Intent(this, PantryActivity::class.java)); true }
+                R.id.nav_resources -> { startActivity(Intent(this, ResourcesActivity::class.java)); true }
+                else -> false
+            }
+        }
+
+        // Handle safe area padding for toolbar + bottom nav
+        ViewCompat.setOnApplyWindowInsetsListener(toolbar) { v, insets ->
+            val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(top = v.paddingTop + sys.top)
+            insets
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(bottom) { v, insets ->
+            val sys = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(bottom = v.paddingBottom + sys.bottom)
+            insets
         }
     }
 }
