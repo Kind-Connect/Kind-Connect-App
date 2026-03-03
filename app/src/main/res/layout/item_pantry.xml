@@ -5,35 +5,47 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="12dp"
-    android:layout_marginBottom="8dp"
-    android:background="#C8C6C6"
-    android:elevation="2dp"
-    android:layout_marginHorizontal="8dp"
-    android:clipToPadding="false">
+    android:layout_marginBottom="10dp"
+    android:layout_marginHorizontal="12dp"
+    android:background="@drawable/pantry_card_bg"
+    android:elevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- IMAGE (left) -->
+    <ImageView
+        android:id="@+id/itemImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerCrop"
+        android:background="#FFFFFF"
+        android:padding="4dp" />
+
+    <!-- TRASH ICON (top-right) -->
+    <ImageView
+        android:id="@+id/btnRemove"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/baseline_delete_24"
+        android:padding="4dp" />
+
+    <!-- TEXT COLUMN (between image and trash icon) -->
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
+        android:orientation="vertical"
+        android:layout_toEndOf="@id/itemImage"
+        android:layout_toStartOf="@id/btnRemove"
+        android:layout_marginEnd="8dp">
 
-        <ImageView
-            android:id="@+id/itemImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="12dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            android:background="#FFFFFF"
-            android:padding="4dp" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-        <TextView
+    <TextView
         android:id="@+id/itemName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,16 +80,9 @@
         android:text="Expires: 2025-12-01"
         android:textSize="14sp"
         android:textColor="@android:color/holo_red_dark" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/btnRemove"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#234F2E"
-        android:layout_gravity="center_vertical|right"
-        android:text="Remove"/>
 
 </LinearLayout>
+
+    </RelativeLayout>
+
+    </LinearLayout>

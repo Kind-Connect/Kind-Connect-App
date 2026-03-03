@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import java.io.File
 
 class PantryAdapter(private val items: MutableList<PantryItem>,private val onRemoveClick: (PantryItem) -> Unit) :
     RecyclerView.Adapter<PantryAdapter.PantryViewHolder>() {
@@ -17,7 +18,7 @@ class PantryAdapter(private val items: MutableList<PantryItem>,private val onRem
         val desc: TextView = itemView.findViewById(R.id.itemDescription)
         val quantity: TextView = itemView.findViewById(R.id.itemQuantity)
         val expiration: TextView = itemView.findViewById(R.id.itemExpiration)
-        val btnRemove: Button = itemView.findViewById(R.id.btnRemove)
+        val btnRemove: ImageView = itemView.findViewById(R.id.btnRemove)
         val image: ImageView = itemView.findViewById(R.id.itemImage)
     }
 
@@ -35,7 +36,7 @@ class PantryAdapter(private val items: MutableList<PantryItem>,private val onRem
         holder.expiration.text = "Expires: ${item.expirationDate}"
 
         Glide.with(holder.itemView.context)
-            .load(item.imageUrl)
+            .load(item.imageUrl?.let { File(it) })
             .placeholder(R.drawable.ic_launcher_background)
             .into(holder.image)
 

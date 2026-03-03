@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import java.io.FileOutputStream
 import java.io.File
 import java.util.Calendar
 
@@ -102,6 +103,7 @@ class MyPantryFragment : Fragment() {
 
     }
     private fun showAddItemDialog() {
+        selectedImageUri = null
         val dialogView = layoutInflater.inflate(R.layout.add_pantry_item, null)
         val nameInput = dialogView.findViewById<EditText>(R.id.editName)
         val descInput = dialogView.findViewById<EditText>(R.id.editDescription)
@@ -146,12 +148,16 @@ class MyPantryFragment : Fragment() {
             .setTitle("Add Pantry Item")
             .setView(dialogView)
             .setPositiveButton("Add") { _, _ ->
-                uploadImageAndSaveItem(
+                val localPath = selectedImageUri?.let { saveImageLocally(it) }
+
+                saveItemToFirestore(
                     nameInput.text.toString(),
                     descInput.text.toString(),
                     quantityInput.text.toString().toIntOrNull() ?: 1,
-                    dateInput.text.toString()
+                    dateInput.text.toString(),
+                    localPath // this is now the imageUrl field
                 )
+
             }
             .setNegativeButton("Cancel", null)
             .show()
@@ -191,58 +197,42 @@ class MyPantryFragment : Fragment() {
                 }
         }
     }
-    private fun uploadImageAndSaveItem(
-        name: String,
-        description: String,
-        quantity: Int,
-        expiration: String
-    ) {
-        val uri = selectedImageUri
+    private fun saveImageLocally(uri: Uri): String {
+        val inputStream = requireContext().contentResolver.openInputStream(uri)
+        val fileName = "pantry_${System.currentTimeMillis()}.jpg"
+        val file = File(requireContext().filesDir, fileName)
 
-        // If no image selected, save without imageUrl
-        if (uri == null) {
-            saveItemToFirestore(name, description, quantity, expiration, null)
-            return
-        }
+        val outputStream = FileOutputStream(file)
+        inputStream?.copyTo(outputStream)
 
-        val storageRef = FirebaseStorage.getInstance().reference
-            .child("pantry_images/${System.currentTimeMillis()}.jpg")
+        inputStream?.close()
+        outputStream.close()
 
-        storageRef.putFile(uri)
-            .continueWithTask { task : com.google.android.gms.tasks.Task<com.google.firebase.storage.UploadTask.TaskSnapshot> ->
-                if (!task.isSuccessful) throw task.exception ?: Exception("Error uploading image")
-                storageRef.downloadUrl
-            }
-            .addOnSuccessListener { downloadUrl: Uri ->
-                saveItemToFirestore(name, description, quantity, expiration, downloadUrl.toString())
-            }
-            .addOnFailureListener {
-                saveItemToFirestore(name, description, quantity, expiration, null)
-            }
+        return file.absolutePath
     }
     private fun saveItemToFirestore(
         name: String,
         description: String,
         quantity: Int,
         expiration: String,
-        imageUrl: String?
+        imagePath: String?
     ) {
-        val itemMap = hashMapOf(
+        val item = hashMapOf(
             "name" to name,
             "description" to description,
             "quantity" to quantity,
             "expiration" to expiration,
-            "imageUrl" to imageUrl
+            "imageUrl" to imagePath
         )
 
         db.collection("pantryItems")
-            .add(itemMap)
+            .add(item)
             .addOnSuccessListener {
-                Toast.makeText(context, "Item saved!", Toast.LENGTH_SHORT).show()
                 loadItems()
+                Toast.makeText(requireContext(), "Item added!", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener {
-                Toast.makeText(context, "Error saving item", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Error saving item", Toast.LENGTH_SHORT).show()
             }
     }
 }
