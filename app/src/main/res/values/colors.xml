@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="cloud_white">#F4F7F5</color>
     <color name="white">#FFFFFFFF</color>
     <color name="lightGreen">#E8F5E9</color>
     <color name="primaryGreen">#4CAF50</color>
     <color name="darkGreen">#388E3C</color>
+    <color name="kindconnect_purple">#6A3FD1</color>
+    <color name="kindconnect_purple_dark">#512DA8</color>
+    <color name="kindconnect_background">#F3F0FA</color>
+    <color name="kindconnect_green">#1E4D2B</color>
 </resources>

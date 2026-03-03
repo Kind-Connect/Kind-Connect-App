@@ -18,8 +18,9 @@
         android:id="@+id/openProfileButton"
         android:layout_width="181dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:text="Click to Continue!" />
+        android:text="Click to Continue!"
+        android:backgroundTint="@color/kindconnect_purple"
+        android:textColor="@color/white"/>
 
 
 </LinearLayout>
