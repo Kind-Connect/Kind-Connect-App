@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#EEE8FF"
     android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mental Health And Shelter Resources"
-            android:textColor="@android:color/black"
+            android:textColor="#1F1F1F"
             android:textSize="22sp"
             android:textStyle="bold"
             android:paddingBottom="10dp" />
@@ -68,4 +68,5 @@
         app:itemTextColor="@color/bottom_nav_item_tint"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
+
 </LinearLayout>

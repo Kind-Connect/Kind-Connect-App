@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#EEE8FF"
     android:fitsSystemWindows="true">
 
     <androidx.appcompat.widget.Toolbar
@@ -77,9 +77,10 @@
                         android:layout_width="327dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
-                        android:backgroundTint="#234F2E"
+                        android:backgroundTint="@color/kindconnect_purple"
                         android:paddingVertical="18dp"
                         android:text="Go to My Pantry Items"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white" />
 
                     <Button
@@ -87,9 +88,10 @@
                         android:layout_width="329dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:backgroundTint="#4CAF50"
+                        android:backgroundTint="@color/kindconnect_purple"
                         android:paddingVertical="18dp"
                         android:text="Go to Recipe Generator"
+                        android:textAllCaps="false"
                         android:textColor="@android:color/white" />
 
                     <FrameLayout

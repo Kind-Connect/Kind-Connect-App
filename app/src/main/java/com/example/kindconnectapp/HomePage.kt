@@ -37,20 +37,6 @@ class HomePage : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             Toast.makeText(this, "Menu clicked", Toast.LENGTH_SHORT).show()
         }
-//code was giving me errors so I commented it out.
-//        toolbar.setOnMenuItemClickListener { item ->
-//            when (item.itemId) {
-//                R.id.action_search -> {
-//                    Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show()
-//                    true
-//                }
-//                R.id.action_profile -> {
-//                    startActivity(Intent(this, ProfileActivity::class.java))
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -66,7 +52,7 @@ class HomePage : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_favorites -> {
-                    startActivity(Intent(this, FavoriteRecipesActivity::class.java))
+                    startActivity(Intent(this, UserProfileActivity::class.java))
                     drawerLayout.closeDrawers()
                     true
                 }
@@ -78,8 +64,18 @@ class HomePage : AppCompatActivity() {
         bottom.setOnItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.nav_home -> true
-                R.id.nav_pantry -> { startActivity(Intent(this, PantryActivity::class.java)); true }
-                R.id.nav_resources -> { startActivity(Intent(this, ResourcesActivity::class.java)); true }
+                R.id.nav_pantry -> {
+                    startActivity(Intent(this, PantryActivity::class.java))
+                    true
+                }
+                R.id.nav_resources -> {
+                    startActivity(Intent(this, ResourcesActivity::class.java))
+                    true
+                }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }

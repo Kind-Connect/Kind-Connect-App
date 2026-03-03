@@ -29,6 +29,10 @@ class PantryActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    true
+                }
 
                 else -> false
             }

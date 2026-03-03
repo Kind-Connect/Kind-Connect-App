@@ -1,5 +1,6 @@
 package com.example.kindconnectapp
 //Comment for commit
+import android.content.Intent
 import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
@@ -114,6 +115,11 @@ class MapActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+                R.id.nav_profile -> {
+                startActivity(Intent(this, UserProfileActivity::class.java))
+                true
+            }
+
                 else -> false
             }
         }

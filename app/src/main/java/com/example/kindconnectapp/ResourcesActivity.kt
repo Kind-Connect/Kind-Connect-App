@@ -30,6 +30,10 @@ class ResourcesActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_resources -> true
+                R.id.nav_profile -> {
+                    startActivity(Intent(this, UserProfileActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }

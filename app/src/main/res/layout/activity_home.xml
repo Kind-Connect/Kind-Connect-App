@@ -6,166 +6,164 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fitsSystemWindows="true">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/topToolbar"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="96dp"
-        android:background="#234F2E"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="16dp"
-        app:title="KindConnect"
-        app:titleTextColor="@android:color/white"
-        app:titleMarginStart="24dp" />
+        android:layout_height="match_parent"
+        android:background="#EEE8FF"
+        android:fitsSystemWindows="true">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
-        android:paddingTop="16dp"
-        android:clipToPadding="false">
-
-        <LinearLayout
-            android:orientation="vertical"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="96dp"
+            android:background="#234F2E"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            app:title="KindConnect"
+            app:titleTextColor="@android:color/white"
+            app:titleMarginStart="24dp" />
 
-            <ImageView
-                android:id="@+id/logoImage"
-                android:layout_width="192dp"
-                android:layout_height="183dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="12dp"
-                android:contentDescription="KindConnect logo"
-                app:srcCompat="@drawable/logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2" />
-
-            <TextView
-                android:id="@+id/welcomeTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Welcome to KindConnect"
-                android:textColor="@android:color/black"
-                android:textSize="26sp"
-                android:fontFamily="sans-serif-medium"
-                android:gravity="center"
-                android:paddingBottom="6dp" />
-
-            <TextView
-                android:id="@+id/greetingText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:padding="16dp"
-                android:text="Connect. Nourish. Support."
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/descriptionText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:lineSpacingExtra="3dp"
-                android:paddingBottom="18dp"
-                android:text="KindConnect is your community’s helping hand, bringing food pantries, shelters, and mental health resources together in one place. We guide you to nearby support services and help you turn what is already in your pantry into easy, comforting meals. Our purpose is simple: connect you to care, nourishment, and hope, right when you need it most."
-                android:textColor="#555555"
-                android:textSize="15sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dp"
-                android:text="Explore KindConnect Features"
-                android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="16dp"
+            android:clipToPadding="false">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="4dp">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/logoImage"
+                    android:layout_width="240dp"
+                    android:layout_height="220dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="KindConnect logo"
+                    app:srcCompat="@drawable/logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2" />
+
+                <TextView
+                    android:id="@+id/welcomeTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Welcome to KindConnect"
+                    android:textColor="#1F1F1F"
+                    android:textSize="26sp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingBottom="6dp" />
+
+                <TextView
+                    android:id="@+id/greetingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="Connect. Nourish. Support."
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="#1F1F1F" />
+
+                <TextView
+                    android:id="@+id/descriptionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:lineSpacingExtra="3dp"
+                    android:paddingBottom="18dp"
+                    android:text="KindConnect is your community’s helping hand, bringing food pantries, shelters, and mental health resources together in one place. We guide you to nearby support services and help you turn what is already in your pantry into easy, comforting meals. Our purpose is simple: connect you to care, nourishment, and hope, right when you need it most."
+                    android:textColor="#444444"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="#F2F2F2"
-                    android:layout_marginBottom="8dp"
-                    android:text="🍽️ Pantry\nNeed help with food or ideas on what to cook? Head to our Pantry section."
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    android:paddingBottom="10dp"
+                    android:text="Explore KindConnect Features"
+                    android:textColor="#1F1F1F"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="#F2F2F2"
-                    android:layout_marginBottom="8dp"
-                    android:text="📍 Map\nSee nearby support centers on an interactive map."
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    android:orientation="vertical"
+                    android:padding="4dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="#F2F2F2"
-                    android:layout_marginBottom="8dp"
-                    android:text="📘 Resources\nBrowse mental health, shelter, and community services."
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:background="@android:color/white"
+                        android:layout_marginBottom="8dp"
+                        android:text="🍽️ Pantry\nNeed help with food or ideas on what to cook? Head to our Pantry section."
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="98dp"
-                    android:background="#F2F2F2"
-                    android:padding="12dp"
-                    android:text="🏠 Home\nReturn here anytime to explore or learn more."
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:background="@android:color/white"
+                        android:layout_marginBottom="8dp"
+                        android:text="📍 Map\nSee nearby support centers on an interactive map."
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:background="@android:color/white"
+                        android:layout_marginBottom="8dp"
+                        android:text="📘 Resources\nBrowse mental health, shelter, and community services."
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="98dp"
+                        android:background="@android:color/white"
+                        android:padding="12dp"
+                        android:text="🏠 Home\nReturn here anytime to explore or learn more."
+                        android:textColor="#333333"
+                        android:textSize="16sp" />
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="84dp"
-        android:background="#234F2E"
-        android:clipToPadding="false"
-        android:elevation="8dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="8dp"
-        app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent"
-        app:itemHorizontalTranslationEnabled="false"
-        app:itemIconSize="29dp"
-        app:itemIconTint="@color/bottom_nav_item_tint"
-        app:itemTextColor="@color/bottom_nav_item_tint"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemBackground="@android:color/transparent" />
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:background="#234F2E"
+            android:clipToPadding="false"
+            android:elevation="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="8dp"
+            app:itemActiveIndicatorStyle="@style/BottomNavActiveIndicator.Transparent"
+            app:itemHorizontalTranslationEnabled="false"
+            app:itemIconSize="29dp"
+            app:itemIconTint="@color/bottom_nav_item_tint"
+            app:itemTextColor="@color/bottom_nav_item_tint"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemBackground="@android:color/transparent" />
 
-</LinearLayout>
-<com.google.android.material.navigation.NavigationView
-android:id="@+id/nav_view"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:layout_gravity="start"
-app:menu="@menu/drawer_menu" />
+    </LinearLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/drawer_menu" />
 
-
-
+</androidx.drawerlayout.widget.DrawerLayout>
