@@ -20,12 +20,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
+import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import androidx.core.content.ContextCompat
 import kotlinx.coroutines.CancellationException
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationManager
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import kotlin.jvm.java
+
 
 class MapActivity : AppCompatActivity() {
 
@@ -136,7 +141,12 @@ class MapActivity : AppCompatActivity() {
         withContext(Dispatchers.Main) {
             try {
                 val target = Point.fromLngLat(lng, lat)
-                mapView.getMapboxMap().setCamera(CameraOptions.Builder().center(target).zoom(15.0).build())
+                mapView.getMapboxMap().setCamera(
+                    CameraOptions.Builder()
+                        .center(target)
+                        .zoom(15.0)
+                        .build()
+                )
 
                 if (pointAnnotationManager == null) {
                     pointAnnotationManager = mapView.annotations.createPointAnnotationManager()
@@ -144,9 +154,29 @@ class MapActivity : AppCompatActivity() {
 
                 pointAnnotationManager?.let { manager ->
                     manager.deleteAll()
+
+                    // 📍 Load the built-in Mapbox red pin icon as a bitmap
+                    val drawable = ContextCompat.getDrawable(this@MapActivity, R.drawable.map)!!
+                    val markerBitmap = Bitmap.createBitmap(
+                        drawable.intrinsicWidth,
+                        drawable.intrinsicHeight,
+                        Bitmap.Config.ARGB_8888
+                    )
+                    val canvas = Canvas(markerBitmap)
+                    drawable.setBounds(0, 0, canvas.width, canvas.height)
+                    drawable.draw(canvas)
+
                     val pointAnnotationOptions = PointAnnotationOptions()
                         .withPoint(target)
-                        .withTextField(title)
+                        .withIconImage(markerBitmap)   // attaches the pin icon
+                        .withIconSize(0.3)             // adjust for visibility
+                        .withTextField(title)          // resource name label
+                        .withTextSize(12.0)
+                        .withTextColor(android.graphics.Color.BLACK)
+                        .withTextHaloColor(android.graphics.Color.WHITE)
+                        .withTextHaloWidth(1.5)
+                        .withTextOffset(listOf(0.0, -3.0)) // floats label above the pin
+
                     manager.create(pointAnnotationOptions)
                 }
             } catch (ce: CancellationException) {
