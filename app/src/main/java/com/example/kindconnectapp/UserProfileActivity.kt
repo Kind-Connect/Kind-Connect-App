@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Button
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserProfileActivity : AppCompatActivity() {
@@ -28,6 +30,16 @@ class UserProfileActivity : AppCompatActivity() {
         recipesListText = findViewById(R.id.recipesListText)
         sheltersListText = findViewById(R.id.sheltersListText)
 
+        val logoutButton = findViewById<Button>(R.id.btnLogout)
+        logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
+
         val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val name = prefs.getString("name", "User") ?: "User"
         val email = prefs.getString("email", "No email saved") ?: "No email saved"
@@ -36,7 +48,6 @@ class UserProfileActivity : AppCompatActivity() {
         nameText.text = name
         emailText.text = email
 
-        // Bottom nav so you can leave Profile
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNav.selectedItemId = R.id.nav_profile
         bottomNav.setOnItemSelectedListener { item ->
@@ -75,7 +86,6 @@ class UserProfileActivity : AppCompatActivity() {
 
                 recipesListText.text = titles.joinToString(separator = "\n") { "• $it" }
 
-                // Tap the list to remove one
                 recipesListText.setOnClickListener {
                     showRemoveRecipeDialog(titles)
                 }
@@ -92,7 +102,6 @@ class UserProfileActivity : AppCompatActivity() {
             .setItems(titles.toTypedArray()) { _, which ->
                 val selectedTitle = titles[which]
 
-                // Find and delete any docs that match this title
                 db.collection("users")
                     .document(userNameKey)
                     .collection("favorites")
