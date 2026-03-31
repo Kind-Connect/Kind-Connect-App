@@ -1,6 +1,5 @@
 package com.example.kindconnectapp
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +19,7 @@ import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
 
-class RecipeFragment : Fragment() {
+class SearchRecipesFragment : Fragment() {
 
     private lateinit var pantryInput: EditText
     private lateinit var generateButton: Button
@@ -35,12 +33,10 @@ class RecipeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.recipe_generator_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_search_recipes, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         pantryInput = view.findViewById(R.id.pantryInput)
         generateButton = view.findViewById(R.id.generateButton)
         recipeRecyclerView = view.findViewById(R.id.recipeRecyclerView)
@@ -52,17 +48,6 @@ class RecipeFragment : Fragment() {
             if (ingredients.isNotBlank()) {
                 fetchRecipes(ingredients)
             }
-        }
-        val toolbar = view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)
-
-        // Set a back arrow icon
-        toolbar.setNavigationIcon(R.drawable.outline_arrow_back_24)
-
-        // Make the arrow white
-        toolbar.navigationIcon?.setTint(Color.WHITE)
-        // Back behavior
-        toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
     }
 
@@ -85,7 +70,6 @@ class RecipeFragment : Fragment() {
 
                     recipes.forEach { basic ->
                         fetchRecipeDetails(basic.id) { detailed ->
-                            // Merge basic and detailed data
                             val mergedRecipe = detailed.copy(
                                 title = basic.title,
                                 image = basic.image,
@@ -105,6 +89,7 @@ class RecipeFragment : Fragment() {
             }
         })
     }
+
     private fun fetchRecipeDetails(id: Int, callback: (Recipe) -> Unit) {
         val url = "https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey"
         val request = Request.Builder().url(url).build()

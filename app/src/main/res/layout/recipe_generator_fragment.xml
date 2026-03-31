@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,73 +14,21 @@
         app:title="Recipe Generator"
         app:titleTextColor="@android:color/white"
         app:titleMarginStart="24dp" />
-    <ImageView
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_gravity="center"
-        android:src="@drawable/outline_chef_hat_24"/>
 
-
-    <!-- Header Card -->
-    <androidx.cardview.widget.CardView
+    <!-- Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/recipeTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="4dp"
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="@android:color/transparent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:background="#D5D1D1"
-        android:layout_marginBottom="8dp"
-        android:text="Get recipes from our recipe generator based on what's in your pantry!"
-        android:textColor="#333333"
-        android:textSize="16sp" />
+        app:tabIndicatorColor="#234F2E"
+        app:tabSelectedTextColor="#234F2E"
+        app:tabTextColor="#808080" />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:text="What's in Your Pantry?"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="e.g. rice, beans, tomato"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="#234F2E"
-        app:hintTextColor="@color/black">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/pantryInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="12dp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/generateButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Find Recipes"
-        android:backgroundTint="#234F2E"
-        android:layout_marginBottom="16dp"
-        android:paddingVertical="14dp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recipeRecyclerView"
+    <!-- ViewPager2 to hold the two fragments -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/recipeViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="16dp"
-        android:clipToPadding="false"
-        android:scrollbars="vertical" />
+        android:layout_weight="1" />
+
 </LinearLayout>

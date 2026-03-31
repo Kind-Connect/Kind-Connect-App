@@ -9,7 +9,7 @@ class RecipeGeneratorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recipe_generator)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, RecipeFragment())
+            .replace(R.id.fragmentContainer, RecipeGeneratorFragment())
             .commit()
     }
 }

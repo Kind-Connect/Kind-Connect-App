@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Header -->
+    <TextView
+        android:id="@+id/recommendedHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recommended Recipes"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp"
+        android:textColor="#234F2E" />
+
+    <!-- No pantry items message -->
+    <TextView
+        android:id="@+id/noPantryMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You haven't added any pantry items yet!"
+        android:textSize="16sp"
+        android:textColor="#777777"
+        android:visibility="gone"
+        android:layout_marginTop="40dp" />
+
+
+    <!-- RecyclerView for recommended recipes -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recommendedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+</LinearLayout>

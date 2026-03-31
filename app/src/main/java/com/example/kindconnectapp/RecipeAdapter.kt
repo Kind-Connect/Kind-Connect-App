@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
+import okhttp3.*
+import com.google.gson.Gson
+import java.io.IOException
 
 class RecipeAdapter(private val recipeList: List<Recipe>) :
     RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
@@ -46,7 +49,7 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
 
             val db = FirebaseFirestore.getInstance()
             val favoritesRef = db.collection("users").document(name).collection("favorites")
-            // ✅ Add this log
+
             Log.d("RecipeAdapter", "Saving favorite for user=$name, recipeId=${recipe.id}")
 
             recipe.isFavorite = !recipe.isFavorite
@@ -82,4 +85,26 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
         }
     }
     override fun getItemCount(): Int = recipeList.size
+    private fun fetchFullRecipeDetails(id: Int, callback: (Recipe) -> Unit) {
+        val apiKey = "5df89a2562b54f9fbfde47f5e19ac90a"
+        val url = "https://api.spoonacular.com/recipes/$id/information?apiKey=$apiKey"
+
+        val client = OkHttpClient()
+        val request = Request.Builder().url(url).build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.e("DETAIL_ERROR", "Failed to fetch recipe details", e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.body?.string()?.let { json ->
+                    val gson = Gson()
+                    val detailedRecipe = gson.fromJson(json, Recipe::class.java)
+                    callback(detailedRecipe)
+                }
+            }
+        })
+    }
+
 }
