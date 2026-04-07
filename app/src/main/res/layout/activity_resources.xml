@@ -27,22 +27,28 @@
         android:paddingEnd="20dp"
         android:paddingTop="20dp">
 
-        <SearchView
-            android:id="@+id/searchBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:queryHint="Search resources (shelter, mental health)"
-            android:layout_marginBottom="16dp" />
-
         <TextView
             android:id="@+id/resourcesTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mental Health And Shelter Resources"
+            android:text="Find Local Support"
             android:textColor="#1F1F1F"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:paddingBottom="10dp" />
+            android:paddingBottom="12dp" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/resourceTabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/transparent"
+            app:tabIndicatorColor="#5C2DFF"
+            app:tabIndicatorFullWidth="false"
+            app:tabMode="fixed"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabSelectedTextColor="#5C2DFF"
+            app:tabTextColor="#444444" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/resourcesRecyclerView"

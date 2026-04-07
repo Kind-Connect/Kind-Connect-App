@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 class ResourceAdapter(
     private val context: Context,
     resources: List<Resource>,
-    private val onItemClick: (Resource) -> Unit
+    private val onItemClick: (Resource) -> Unit,
+    private val onFavoriteClick: (Resource) -> Unit,
+    private val favoriteNames: MutableSet<String>
 ) : RecyclerView.Adapter<ResourceAdapter.ViewHolder>() {
 
     private var displayList: MutableList<Resource> = resources.toMutableList()
@@ -21,13 +23,36 @@ class ResourceAdapter(
         val image: ImageView = itemView.findViewById(R.id.resourceImage)
         val name: TextView = itemView.findViewById(R.id.resourceName)
         val description: TextView = itemView.findViewById(R.id.resourceDescription)
+        val category: TextView = itemView.findViewById(R.id.resourceCategory)
+        val favoriteButton: ImageView = itemView.findViewById(R.id.favoriteButton)
 
         fun bind(resource: Resource) {
             name.text = resource.name
             description.text = resource.description
-            image.setImageResource(R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2)
+            category.text = resource.category
 
-            itemView.setOnClickListener { onItemClick(resource) }
+            image.setImageResource(
+                resource.imageRes
+                    ?: R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2
+            )
+
+            updateFavoriteIcon(resource)
+
+            itemView.setOnClickListener {
+                onItemClick(resource)
+            }
+
+            favoriteButton.setOnClickListener {
+                onFavoriteClick(resource)
+            }
+        }
+
+        private fun updateFavoriteIcon(resource: Resource) {
+            if (favoriteNames.contains(resource.name)) {
+                favoriteButton.setImageResource(R.drawable.ic_heart_filled)
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_heart_outline)
+            }
         }
     }
 
@@ -42,17 +67,14 @@ class ResourceAdapter(
 
     override fun getItemCount(): Int = displayList.size
 
-    fun filterList(query: String) {
-        val lower = query.trim().lowercase()
-        displayList = if (lower.isEmpty()) {
-            fullList.toMutableList()
-        } else {
-            fullList.filter { resource ->
-                resource.name.lowercase().contains(lower) ||
-                        resource.description.lowercase().contains(lower) ||
-                        resource.urlOrAddress.lowercase().contains(lower)
-            }.toMutableList()
-        }
+    fun filterByCategory(selectedCategory: String) {
+        displayList = fullList.filter { resource ->
+            resource.category.equals(selectedCategory, ignoreCase = true)
+        }.toMutableList()
+        notifyDataSetChanged()
+    }
+
+    fun refreshFavorites() {
         notifyDataSetChanged()
     }
 }

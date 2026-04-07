@@ -1,20 +1,33 @@
 package com.example.kindconnectapp
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.content.Intent
+import com.google.android.material.tabs.TabLayout
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ResourcesActivity : AppCompatActivity() {
+
+    private lateinit var adapter: ResourceAdapter
+    private val db = FirebaseFirestore.getInstance()
+    private var userNameKey: String = "User"
+    private val favoriteNames = mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resources)
 
+        val prefs = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        userNameKey = prefs.getString("name", "User") ?: "User"
+
         val bottom = findViewById<BottomNavigationView>(R.id.bottomNavigation)
+        val recyclerView = findViewById<RecyclerView>(R.id.resourcesRecyclerView)
+        val tabLayout = findViewById<TabLayout>(R.id.resourceTabs)
+
         bottom.selectedItemId = R.id.nav_resources
 
         bottom.setOnItemSelectedListener { item ->
@@ -32,136 +45,216 @@ class ResourcesActivity : AppCompatActivity() {
                 R.id.nav_resources -> true
                 R.id.nav_profile -> {
                     startActivity(Intent(this, UserProfileActivity::class.java))
+                    overridePendingTransition(0, 0)
                     true
                 }
                 else -> false
             }
         }
 
-        val recyclerView = findViewById<RecyclerView>(R.id.resourcesRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val resourceList = listOf(
             Resource(
-                "Petersburg Mental Health Support Center",
-                "Provides crisis services, evaluations, and outpatient counseling.",
-                "200 Washington St, Petersburg, VA",
-                37.225500, -77.403400
+                name = "Petersburg Community Shelter",
+                description = "Emergency shelter offering temporary housing and support services.",
+                urlOrAddress = "123 Main St, Petersburg, VA",
+                category = "Shelters",
+                lat = 37.231100,
+                lng = -77.399200
             ),
             Resource(
-                "Hope Behavioral Wellness Clinic",
-                "Therapy, substance abuse programs, and long-term treatment plans.",
-                "450 Hope Ave, Petersburg, VA",
-                37.226700, -77.401900
+                name = "Tri-Cities Women’s Resource Hub",
+                description = "Shelter assistance, advocacy services, and housing resources for women.",
+                urlOrAddress = "10 Women’s Plaza, Petersburg, VA",
+                category = "Shelters",
+                lat = 37.232300,
+                lng = -77.397700
             ),
             Resource(
-                "Southside Family Health Services",
-                "Family mental health services, behavioral therapy, and medical support.",
-                "123 Southside Dr, Petersburg, VA",
-                37.227900, -77.400400
+                name = "Southside Emergency Homeless Shelter",
+                description = "Overnight housing, meals, and crisis support.",
+                urlOrAddress = "200 Southside Shelter Rd, Petersburg, VA",
+                category = "Shelters",
+                lat = 37.227100,
+                lng = -77.399800
             ),
             Resource(
-                "Better Pathways Addiction Recovery",
-                "Offers outpatient and group substance abuse treatment programs.",
-                "80 Recovery Ln, Petersburg, VA",
-                37.229100, -77.402500
+                name = "Tri-Cities Family Crisis Shelter",
+                description = "Domestic support, temporary housing, and safety resources.",
+                urlOrAddress = "5 Family Ct, Petersburg, VA",
+                category = "Shelters",
+                lat = 37.228300,
+                lng = -77.398300
             ),
             Resource(
-                "Petersburg Behavioral Treatment Center",
-                "Intensive therapy, evaluations, and inpatient care.",
-                "12 Treatment Plaza, Petersburg, VA",
-                37.230300, -77.401000
+                name = "Petersburg Food Pantry",
+                description = "Provides groceries, canned goods, and basic food assistance for local families.",
+                urlOrAddress = "300 Food Bank Dr, Petersburg, VA",
+                category = "Food Banks",
+                lat = 37.229200,
+                lng = -77.401200
             ),
             Resource(
-                "Northside Psychological Services",
-                "Specialized treatment for anxiety, depression, trauma, and family counseling.",
-                "5 Northside Ave, Petersburg, VA",
-                37.231500, -77.399500
+                name = "Tri-Cities Community Food Bank",
+                description = "Community food bank offering emergency food support and pantry essentials.",
+                urlOrAddress = "145 Community Ln, Petersburg, VA",
+                category = "Food Banks",
+                lat = 37.230100,
+                lng = -77.398800
             ),
             Resource(
-                "Central Virginia Behavioral Care Center",
-                "Outpatient therapy, psychiatric evaluations, and community wellness programs.",
-                "269 Medical Park Blvd, Petersburg, VA",
-                37.226300, -77.401600
+                name = "Southside Family Food Assistance Center",
+                description = "Offers free groceries, meal support, and food distribution services.",
+                urlOrAddress = "220 South St, Petersburg, VA",
+                category = "Food Banks",
+                lat = 37.227800,
+                lng = -77.400900
             ),
             Resource(
-                "Elm Street Mental Wellness Institute",
-                "Counseling, medication management, and emotional support services.",
-                "Elm St & 4th, Petersburg, VA",
-                37.227500, -77.400100
+                name = "Hope Pantry and Food Outreach",
+                description = "Supports families with pantry items, food boxes, and local meal assistance.",
+                urlOrAddress = "88 Hope Ave, Petersburg, VA",
+                category = "Food Banks",
+                lat = 37.226900,
+                lng = -77.402100
             ),
             Resource(
-                "Neighborhood Mental Health & Recovery Center",
-                "Crisis stabilization, recovery support, and long-term therapy.",
-                "33 Neighborhood Ct, Petersburg, VA",
-                37.228700, -77.398600
+                name = "Petersburg Mental Health Support Center",
+                description = "Provides crisis services, evaluations, and outpatient counseling.",
+                urlOrAddress = "200 Washington St, Petersburg, VA",
+                category = "Mental Health",
+                lat = 37.225500,
+                lng = -77.403400
             ),
             Resource(
-                "Healing Heart Support Foundation",
-                "Support groups, guided therapy, and grief counseling resources.",
-                "77 Healing Way, Petersburg, VA",
-                37.229900, -77.400700
+                name = "Hope Behavioral Wellness Clinic",
+                description = "Therapy, substance abuse programs, and long-term treatment plans.",
+                urlOrAddress = "450 Hope Ave, Petersburg, VA",
+                category = "Mental Health",
+                lat = 37.226700,
+                lng = -77.401900
             ),
             Resource(
-                "Petersburg Community Shelter",
-                "Emergency shelter offering temporary housing and support services.",
-                "123 Main St, Petersburg, VA",
-                37.231100, -77.399200
+                name = "Southside Family Health Services",
+                description = "Family mental health services, behavioral therapy, and medical support.",
+                urlOrAddress = "123 Southside Dr, Petersburg, VA",
+                category = "Mental Health",
+                lat = 37.227900,
+                lng = -77.400400
             ),
             Resource(
-                "Tri-Cities Women’s Resource Hub",
-                "Shelter assistance, advocacy services, and housing resources for women.",
-                "10 Women’s Plaza, Petersburg, VA",
-                37.232300, -77.397700
-            ),
-            Resource(
-                "Southside Emergency Homeless Shelter",
-                "Overnight housing, meals, and crisis support.",
-                "200 Southside Shelter Rd, Petersburg, VA",
-                37.227100, -77.399800
-            ),
-            Resource(
-                "Tri-Cities Family Crisis Shelter",
-                "Domestic support, temporary housing, and safety resources.",
-                "5 Family Ct, Petersburg, VA",
-                37.228300, -77.398300
-            ),
-            Resource(
-                "River City Youth Support Center",
-                "Youth counseling, after-school mentoring, and crisis intervention.",
-                "50 River St, Petersburg, VA",
-                37.229500, -77.396800
-            ),
-            Resource(
-                "Community Outreach Recovery Program",
-                "Free counseling services, community outreach, and wellness education.",
-                "8 Outreach Ln, Petersburg, VA",
-                37.230700, -77.398900
-            ),
-            Resource(
-                "Petersburg Crisis Support Hotline Center",
-                "24/7 crisis intervention and referral services.",
-                "Hotline Center, Petersburg, VA",
-                37.231900, -77.397400
-            ),
-            Resource(
-                "Pathways Addiction and Recovery Home",
-                "Long-term recovery housing, therapy, and community programs.",
-                "12 Recovery Home Rd, Petersburg, VA",
-                37.233100, -77.395900
+                name = "Neighborhood Mental Health & Recovery Center",
+                description = "Crisis stabilization, recovery support, and long-term therapy.",
+                urlOrAddress = "33 Neighborhood Ct, Petersburg, VA",
+                category = "Mental Health",
+                lat = 37.228700,
+                lng = -77.398600
             )
         )
 
-        val adapter = ResourceAdapter(this, resourceList) { resource ->
-            val intent = Intent(this, MapActivity::class.java).apply {
-                putExtra("name", resource.name)
-                resource.lat?.let { putExtra("lat", it) }
-                resource.lng?.let { putExtra("lng", it) }
-                if (resource.lat == null || resource.lng == null) {
-                    putExtra("address", resource.urlOrAddress)
+        adapter = ResourceAdapter(
+            context = this,
+            resources = resourceList,
+            onItemClick = { resource ->
+
+                val message = """
+        Category: ${resource.category}
+        
+        ${resource.description}
+        
+        Address:
+        ${resource.urlOrAddress}
+    """.trimIndent()
+
+                androidx.appcompat.app.AlertDialog.Builder(this)
+                    .setTitle(resource.name)
+                    .setMessage(message)
+                    .setPositiveButton("Go to Map") { _, _ ->
+
+                        val intent = Intent(this, MapActivity::class.java).apply {
+                            putExtra("name", resource.name)
+                            resource.lat?.let { putExtra("lat", it) }
+                            resource.lng?.let { putExtra("lng", it) }
+
+                            if (resource.lat == null || resource.lng == null) {
+                                putExtra("address", resource.urlOrAddress)
+                            }
+                        }
+
+                        startActivity(intent)
+                    }
+                    .setNegativeButton("Close", null)
+                    .show()
+            },
+            onFavoriteClick = { resource ->
+                toggleFavorite(resource)
+            },
+            favoriteNames = favoriteNames
+        )
+
+        recyclerView.adapter = adapter
+
+        tabLayout.removeAllTabs()
+        tabLayout.addTab(tabLayout.newTab().setText("Shelters"))
+        tabLayout.addTab(tabLayout.newTab().setText("Food Banks"))
+        tabLayout.addTab(tabLayout.newTab().setText("Mental Health"))
+
+        adapter.filterByCategory("Shelters")
+
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when (tab?.position) {
+                    0 -> adapter.filterByCategory("Shelters")
+                    1 -> adapter.filterByCategory("Food Banks")
+                    2 -> adapter.filterByCategory("Mental Health")
                 }
             }
-            startActivity(intent)
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
+
+        loadFavoriteShelterNames()
+    }
+
+    private fun loadFavoriteShelterNames() {
+        db.collection("users")
+            .document(userNameKey)
+            .collection("shelter_favorites")
+            .get()
+            .addOnSuccessListener { result ->
+                favoriteNames.clear()
+                favoriteNames.addAll(result.documents.mapNotNull { it.getString("name") })
+                adapter.refreshFavorites()
+            }
+    }
+
+    private fun toggleFavorite(resource: Resource) {
+        val docRef = db.collection("users")
+            .document(userNameKey)
+            .collection("shelter_favorites")
+            .document(resource.name)
+
+        if (favoriteNames.contains(resource.name)) {
+            docRef.delete().addOnSuccessListener {
+                favoriteNames.remove(resource.name)
+                adapter.refreshFavorites()
+            }
+        } else {
+            val favoriteData = hashMapOf(
+                "name" to resource.name,
+                "category" to resource.category,
+                "description" to resource.description,
+                "address" to resource.urlOrAddress,
+                "lat" to resource.lat,
+                "lng" to resource.lng
+            )
+
+            docRef.set(favoriteData).addOnSuccessListener {
+                favoriteNames.add(resource.name)
+                adapter.refreshFavorites()
+            }
         }
-        recyclerView.adapter = adapter
-}}
+    }
+}

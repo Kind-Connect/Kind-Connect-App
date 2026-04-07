@@ -113,7 +113,7 @@
                         android:padding="12dp"
                         android:background="@android:color/white"
                         android:layout_marginBottom="8dp"
-                        android:text="📍 Map\nSee nearby support centers on an interactive map."
+                        android:text="👤 Profile\nView your saved resources and account information."
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -123,7 +123,7 @@
                         android:padding="12dp"
                         android:background="@android:color/white"
                         android:layout_marginBottom="8dp"
-                        android:text="📘 Resources\nBrowse mental health, shelter, and community services."
+                        android:text="📘 Resources\nBrowse mental health, shelter, and Food Banks."
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
