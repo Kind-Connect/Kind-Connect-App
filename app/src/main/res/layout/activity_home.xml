@@ -94,47 +94,188 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="4dp">
+                    android:orientation="vertical">
 
-                    <TextView
+                    <GridLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:background="@android:color/white"
-                        android:layout_marginBottom="8dp"
-                        android:text="🍽️ Pantry\nNeed help with food or ideas on what to cook? Head to our Pantry section."
-                        android:textColor="#333333"
-                        android:textSize="16sp" />
+                        android:columnCount="2"
+                        android:rowCount="2"
+                        android:useDefaultMargins="true">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:background="@android:color/white"
-                        android:layout_marginBottom="8dp"
-                        android:text="👤 Profile\nView your saved resources and account information."
-                        android:textColor="#333333"
-                        android:textSize="16sp" />
+                        <!-- Pantry Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="4dp"
+                            android:backgroundTint="#E8F5E9"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:id="@+id/cardPantry">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:background="@android:color/white"
-                        android:layout_marginBottom="8dp"
-                        android:text="📘 Resources\nHelps users access emotional support crisis care and long term stability not just basic needs."
-                        android:textColor="#333333"
-                        android:textSize="16sp" />
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="98dp"
-                        android:background="@android:color/white"
-                        android:padding="12dp"
-                        android:text="🏠 Home\nReturn here anytime to explore or learn more."
-                        android:textColor="#333333"
-                        android:textSize="16sp" />
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/pantry"
+                                    />
+
+                                <TextView
+                                    android:text="Pantry"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="Find food help or meal ideas"
+                                    android:textSize="13sp"
+                                    android:textColor="#555"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Resources Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="4dp"
+                            android:backgroundTint="#EDE7F6"
+                            android:id="@+id/cardResources"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/resources"
+                                    />
+
+                                <TextView
+                                    android:text="Resources"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="Access support services"
+                                    android:textSize="13sp"
+                                    android:textColor="#555"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Profile Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="4dp"
+                            android:backgroundTint="#E3F2FD"
+                            android:id="@+id/cardProfile"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/profile"
+                                    />
+
+                                <TextView
+                                    android:text="Profile"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="View saved info"
+                                    android:textSize="13sp"
+                                    android:textColor="#555"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <!-- Home Card -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="0dp"
+                            android:layout_height="180dp"
+                            android:layout_columnWeight="1"
+                            android:layout_margin="8dp"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="4dp"
+                            android:backgroundTint="#FFF3E0"
+                            android:id="@+id/cardHome"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:padding="16dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:src="@drawable/home"
+                                    />
+
+                                <TextView
+                                    android:text="Home"
+                                    android:textSize="18sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="Explore anytime"
+                                    android:textSize="13sp"
+                                    android:textColor="#555"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </GridLayout>
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
