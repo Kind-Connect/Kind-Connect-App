@@ -27,14 +27,10 @@ class ResourceAdapter(
         val favoriteButton: ImageView = itemView.findViewById(R.id.favoriteButton)
 
         fun bind(resource: Resource) {
+            image.setImageResource(resource.imageResId)
             name.text = resource.name
             description.text = resource.description
             category.text = resource.category
-
-            image.setImageResource(
-                resource.imageRes
-                    ?: R.drawable.logo_681f9768_2fbc_4be9_b8a7_ab3797ed3351_removebg_preview_2
-            )
 
             updateFavoriteIcon(resource)
 

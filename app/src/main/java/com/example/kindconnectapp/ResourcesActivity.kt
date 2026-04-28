@@ -61,7 +61,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "123 Main St, Petersburg, VA",
                 category = "Shelters",
                 lat = 37.231100,
-                lng = -77.399200
+                lng = -77.399200,
+                imageResId = R.drawable.petersburg_shelter
             ),
             Resource(
                 name = "Tri-Cities Women’s Resource Hub",
@@ -69,7 +70,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "10 Women’s Plaza, Petersburg, VA",
                 category = "Shelters",
                 lat = 37.232300,
-                lng = -77.397700
+                lng = -77.397700,
+                imageResId = R.drawable.tricities_womens_shelter
             ),
             Resource(
                 name = "Southside Emergency Homeless Shelter",
@@ -77,7 +79,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "200 Southside Shelter Rd, Petersburg, VA",
                 category = "Shelters",
                 lat = 37.227100,
-                lng = -77.399800
+                lng = -77.399800,
+                imageResId = R.drawable.southside_shelter
             ),
             Resource(
                 name = "Tri-Cities Family Crisis Shelter",
@@ -85,7 +88,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "5 Family Ct, Petersburg, VA",
                 category = "Shelters",
                 lat = 37.228300,
-                lng = -77.398300
+                lng = -77.398300,
+                imageResId = R.drawable.tricities_family_shelter
             ),
             Resource(
                 name = "Petersburg Food Pantry",
@@ -93,7 +97,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "300 Food Bank Dr, Petersburg, VA",
                 category = "Food Banks",
                 lat = 37.229200,
-                lng = -77.401200
+                lng = -77.401200,
+                imageResId = R.drawable.petersburg_food
             ),
             Resource(
                 name = "Tri-Cities Community Food Bank",
@@ -101,7 +106,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "145 Community Ln, Petersburg, VA",
                 category = "Food Banks",
                 lat = 37.230100,
-                lng = -77.398800
+                lng = -77.398800,
+                imageResId = R.drawable.tricities
             ),
             Resource(
                 name = "Southside Family Food Assistance Center",
@@ -109,7 +115,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "220 South St, Petersburg, VA",
                 category = "Food Banks",
                 lat = 37.227800,
-                lng = -77.400900
+                lng = -77.400900,
+                imageResId = R.drawable.southside_food
             ),
             Resource(
                 name = "Hope Pantry and Food Outreach",
@@ -117,7 +124,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "88 Hope Ave, Petersburg, VA",
                 category = "Food Banks",
                 lat = 37.226900,
-                lng = -77.402100
+                lng = -77.402100,
+                imageResId = R.drawable.hope_pantry
             ),
             Resource(
                 name = "Petersburg Mental Health Support Center",
@@ -125,7 +133,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "200 Washington St, Petersburg, VA",
                 category = "Mental Health",
                 lat = 37.225500,
-                lng = -77.403400
+                lng = -77.403400,
+                imageResId = R.drawable.petersburg_mental
             ),
             Resource(
                 name = "Hope Behavioral Wellness Clinic",
@@ -133,7 +142,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "450 Hope Ave, Petersburg, VA",
                 category = "Mental Health",
                 lat = 37.226700,
-                lng = -77.401900
+                lng = -77.401900,
+                imageResId = R.drawable.hope_wellness
             ),
             Resource(
                 name = "Southside Family Health Services",
@@ -141,7 +151,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "123 Southside Dr, Petersburg, VA",
                 category = "Mental Health",
                 lat = 37.227900,
-                lng = -77.400400
+                lng = -77.400400,
+                imageResId = R.drawable.southside_health
             ),
             Resource(
                 name = "Neighborhood Mental Health & Recovery Center",
@@ -149,7 +160,8 @@ class ResourcesActivity : AppCompatActivity() {
                 urlOrAddress = "33 Neighborhood Ct, Petersburg, VA",
                 category = "Mental Health",
                 lat = 37.228700,
-                lng = -77.398600
+                lng = -77.398600,
+                imageResId = R.drawable.neighborhood
             )
         )
 
@@ -157,21 +169,19 @@ class ResourcesActivity : AppCompatActivity() {
             context = this,
             resources = resourceList,
             onItemClick = { resource ->
-
                 val message = """
-        Category: ${resource.category}
-        
-        ${resource.description}
-        
-        Address:
-        ${resource.urlOrAddress}
-    """.trimIndent()
+                    Category: ${resource.category}
+                    
+                    ${resource.description}
+                    
+                    Address:
+                    ${resource.urlOrAddress}
+                """.trimIndent()
 
                 androidx.appcompat.app.AlertDialog.Builder(this)
                     .setTitle(resource.name)
                     .setMessage(message)
                     .setPositiveButton("Go to Map") { _, _ ->
-
                         val intent = Intent(this, MapActivity::class.java).apply {
                             putExtra("name", resource.name)
                             resource.lat?.let { putExtra("lat", it) }
