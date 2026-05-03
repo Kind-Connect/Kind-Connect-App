@@ -13,12 +13,12 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/topToolbar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:paddingTop="16dp"
+            android:layout_height="wrap_content"
             android:background="#234F2E"
             app:title="Recipe Generator"
             app:titleTextColor="@android:color/white"
             app:titleMarginStart="24dp" />
+
 
         <ImageView
             android:id="@+id/recipeImage"
