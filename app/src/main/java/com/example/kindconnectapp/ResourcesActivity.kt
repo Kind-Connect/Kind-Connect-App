@@ -258,7 +258,8 @@ class ResourcesActivity : AppCompatActivity() {
                 "description" to resource.description,
                 "address" to resource.urlOrAddress,
                 "lat" to resource.lat,
-                "lng" to resource.lng
+                "lng" to resource.lng,
+                "imageResId" to resource.imageResId
             )
 
             docRef.set(favoriteData).addOnSuccessListener {

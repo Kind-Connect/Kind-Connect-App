@@ -96,14 +96,12 @@
                         android:textStyle="bold"
                         android:textColor="#1F1F1F"/>
 
-                    <TextView
-                        android:id="@+id/recipesListText"
+                    <LinearLayout
+                        android:id="@+id/recipesContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="No favorite recipes yet."
-                        android:textColor="#666666"
-                        android:textSize="14sp" />
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -131,14 +129,12 @@
                         android:textStyle="bold"
                         android:textColor="#1F1F1F"/>
 
-                    <TextView
-                        android:id="@+id/sheltersListText"
+                    <LinearLayout
+                        android:id="@+id/sheltersContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="No favorite shelters yet."
-                        android:textColor="#666666"
-                        android:textSize="14sp" />
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp"/>
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
