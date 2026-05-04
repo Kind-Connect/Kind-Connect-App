@@ -23,8 +23,20 @@ class RecipeDetailActivity : AppCompatActivity() {
         val imageView = findViewById<ImageView>(R.id.recipeImage)
 
         titleView.text = title
-        instructionsView.text = Html.fromHtml(instructions ?: "No instructions available", Html.FROM_HTML_MODE_LEGACY)
         Glide.with(this).load(imageUrl).into(imageView)
+        val raw = instructions ?: ""
+
+        val noHtml = Html.fromHtml(raw, Html.FROM_HTML_MODE_LEGACY).toString()
+
+        val steps = noHtml.split(".")
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+
+        val formatted = steps.mapIndexed { index, step ->
+            "${index + 1}. $step"
+        }.joinToString("\n\n")
+
+        instructionsView.text = formatted
 
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.topToolbar)

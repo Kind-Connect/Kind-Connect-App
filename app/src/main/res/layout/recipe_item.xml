@@ -1,65 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginBottom="16dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="20dp"
     app:cardElevation="4dp"
-    app:cardCornerRadius="12dp"
-    android:backgroundTint="@color/lightGreen">
+    app:strokeWidth="0dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="16dp">
 
+        <!-- Favorite Button (same as resources) -->
         <ImageView
-            android:id="@+id/recipeImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/recipe_image"
-            android:background="@android:color/darker_gray"
-            android:layout_marginEnd="12dp"/>
+            android:id="@+id/favoriteIcon"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:padding="2dp"
+            android:src="@drawable/ic_heart_outline"
+            android:contentDescription="Favorite" />
 
+        <!-- Main Row -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_toStartOf="@id/favoriteIcon"
+            android:orientation="horizontal"
+            android:paddingEnd="10dp">
 
-            <TextView
-                android:id="@+id/recipeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/darkGreen"
-                android:maxLines="2"
-                android:ellipsize="end"/>
-
-
-
-            <TextView
-                android:id="@+id/ingredientInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:textColor="@color/darkGreen"
-                android:layout_marginTop="4dp"/>
-
+            <!-- Recipe Image -->
             <ImageView
-                android:id="@+id/favoriteIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="8dp"
-                android:clickable="true"
-                android:contentDescription="@string/favorite_icon"
-                android:focusable="true"
-                android:src="@drawable/baseline_favorite_border_24" />
+                android:id="@+id/recipeImage"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="14dp"
+                android:background="#EAEAEA"
+                android:padding="6dp"
+                android:scaleType="centerCrop" />
+
+            <!-- Text Column -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/recipeTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:maxLines="2"
+                    android:ellipsize="end" />
+
+                <TextView
+                    android:id="@+id/ingredientInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="#555555"
+                    android:textSize="14sp"
+                    android:maxLines="3"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

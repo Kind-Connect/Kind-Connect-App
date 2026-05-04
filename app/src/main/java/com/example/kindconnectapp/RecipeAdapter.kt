@@ -40,7 +40,8 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
             .load(recipe.image)
             .into(holder.recipeImage)
 
-        val heartRes = if (recipe.isFavorite) R.drawable.baseline_favorite_24 else R.drawable.baseline_favorite_border_24
+        val heartRes = if (recipe.isFavorite) R.drawable.ic_heart_filled
+        else R.drawable.ic_heart_outline
         holder.favoriteIcon.setImageResource(heartRes)
 
         holder.favoriteIcon.setOnClickListener {
@@ -53,8 +54,8 @@ class RecipeAdapter(private val recipeList: List<Recipe>) :
             Log.d("RecipeAdapter", "Saving favorite for user=$name, recipeId=${recipe.id}")
 
             recipe.isFavorite = !recipe.isFavorite
-            val newIcon = if (recipe.isFavorite) R.drawable.baseline_favorite_24
-            else R.drawable.baseline_favorite_border_24
+            val newIcon = if (recipe.isFavorite) R.drawable.ic_heart_filled
+            else R.drawable.ic_heart_outline
             holder.favoriteIcon.setImageResource(newIcon)
 
 
