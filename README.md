@@ -30,5 +30,12 @@
 <p align="center">
   <img src="https://i.imgflip.com/ae5wzq.gif" alt="Demo GIF" width="200" />
 </p>
-## App Demo Video
+## First Semester Demo Video
 https://vimeo.com/1144000009?share=copy&fl=sv&fe=ci 
+
+## Final Presentation Slideshow
+https://canva.link/09he4jcaltrb260
+
+## Final Semester Demo Video
+https://canva.link/afxn74ip0syydu7
+
